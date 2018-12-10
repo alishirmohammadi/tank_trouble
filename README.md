@@ -1,6 +1,6 @@
 # برای نصب SDL
 ## linux:
-`sudo apt install libsdl2-dev libsdl2-gfx-dev`
+###### `sudo apt install libsdl2-dev libsdl2-gfx-dev`
 
 ## mac:
 
@@ -8,8 +8,8 @@
 [homebrew](https://brew.sh/ "brew.sh")
 
 و بعد از اون:
-##### `brew install Sdl2`
-##### `brew install Sdl2Gfx`
+###### `brew install Sdl2`
+###### `brew install Sdl2Gfx`
 
 ## windows:
 
@@ -20,16 +20,16 @@
 
 # CMake(Build and Run)
 کافیه بعد از کلون کردن کل ریپو یه فایل به اسم
-##### `CMakeLists.txt`
+###### `CMakeLists.txt`
 بسازید و بعد
 با توجه به سیستم عاملتون کل محتوای یکی از سه تا فایل
-##### `cmake_win.txt, cmake_linux.txt, cmake_mac.txt`
+###### `cmake_win.txt, cmake_linux.txt, cmake_mac.txt`
 رو تو اون فایل جدیدی که ساختین کپی کنید.
  حالا به جای تمام جاهایی که 
-#### `project_name`
+###### `project_name`
 تو اون فایل اومده، یه اسم دلخواه برا پروژه تون رو جایگزین کنید
 
 ---
 بعد میتونید با استفاده از دستور
-##### `cmake --build .`
+###### `cmake --build .`
 یا از داخل سی لاین با استفاده از چکش سبز رنگی که سمت بالاراست پنجره است، پروژه رو بیلد کنید و با استفاده از مثلث سبز رنگ اونو اجرا کنید.
