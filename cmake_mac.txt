@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.0)
+project(project_name C)
+set(CMAKE_C_STANDARD 99)
+
+file(GLOB_RECURSE SOURCE "src/*.c", "src/*.h")
+add_executable(project_name "${SOURCE}")
+
+INCLUDE_DIRECTORIES(/usr/local/include/SDL2)
+LINK_DIRECTORIES(/usr/local/lib)
+TARGET_LINK_LIBRARIES(project_name m SDL2 SDL2_gfx)
