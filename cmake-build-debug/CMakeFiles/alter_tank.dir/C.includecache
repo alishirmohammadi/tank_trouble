@@ -32,7 +32,11 @@ SDL2/SDL.h
 SDL2/SDL2_gfxPrimitives.h
 -
 
-/home/ali/Documents/fop/project/src/main.c
+/home/ali/Documents/fop/project/src/map.h
+structs.h
+/home/ali/Documents/fop/project/src/structs.h
+
+/home/ali/Documents/fop/project/src/physics.c
 stdio.h
 -
 stdbool.h
@@ -47,6 +51,8 @@ SDL2/SDL2_gfxPrimitives.h
 -
 tank.h
 /home/ali/Documents/fop/project/src/tank.h
+bullet.h
+/home/ali/Documents/fop/project/src/bullet.h
 map.h
 /home/ali/Documents/fop/project/src/map.h
 keyboard_handler.h
@@ -55,8 +61,6 @@ colors.h
 /home/ali/Documents/fop/project/src/colors.h
 physics.h
 /home/ali/Documents/fop/project/src/physics.h
-
-/home/ali/Documents/fop/project/src/map.h
 structs.h
 /home/ali/Documents/fop/project/src/structs.h
 

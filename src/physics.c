@@ -26,7 +26,7 @@ double magnitude(double x, double y) {
 }
 
 double wall_distance(double x, double y, double x1, double y1, double x2, double y2) {
-    //return 0;
+    return 0;
     double m = 0;
     if (x1 == x2) {
         if (y < y1)

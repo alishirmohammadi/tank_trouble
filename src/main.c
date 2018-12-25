@@ -79,8 +79,8 @@ int main() {
 
         physics_renderer(tanks, TANKS_COUNT, &map);
         DrawMap(&map, renderer);
-        DrawTanksBullets(tanks, TANKS_COUNT, renderer);
         DrawTank(tanks, TANKS_COUNT, renderer);
+        DrawTanksBullets(tanks, TANKS_COUNT, renderer);
 
 
         SDL_RenderPresent(renderer);
