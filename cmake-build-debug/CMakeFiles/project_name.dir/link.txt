@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -rdynamic CMakeFiles/project_name.dir/src/simple_snake.c.o  -o project_name -lm -lSDL2 -lSDL2_gfx 

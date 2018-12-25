@@ -1,8 +1,2 @@
-//
-// Created by ali on 16/12/18.
-//
-
-#ifndef ALTER_TANK_PHYSICS_H
-#define ALTER_TANK_PHYSICS_H
-
-#endif //ALTER_TANK_PHYSICS_H
+#include "structs.h"
+void physics_renderer(Tank tank[], int count, Map *map);
