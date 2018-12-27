@@ -1,2 +1,2 @@
 #include "structs.h"
-void physics_renderer(Tank tank[], int count, Map *map);
+void PhysicsRenderer(Tank *tanks, int count, Map *map);

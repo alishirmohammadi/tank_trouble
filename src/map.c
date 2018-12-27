@@ -13,20 +13,12 @@
 void LoadMap(Map *map, char *src) {
     FILE *file;
     file = fopen(src, "r");
-    char linecount[100];
-    fgets(linecount, 100, file);
-    map->wall_count = (linecount[0] - '0') * 10 + linecount[1] - '0';
-    for(int i = 0; i < map->wall_count; i++) {
-        char wall[20];
-        fgets(wall, 20, file);
-        map->walls[i].x1 = wall[0] - '0';
-        map->walls[i].y1 = wall[2] - '0';
-        map->walls[i].x2 = wall[4] - '0';
-        map->walls[i].y2 = wall[6] - '0';
-    }
+    fscanf(file, "%d\n", &map->wall_count);
+    for(int i = 0; i < map->wall_count; i++)
+        fscanf(file, "%d %d %d %d\n", &map->walls[i].x1, &map->walls[i].y1, &map->walls[i].x2, &map->walls[i].y2);
 }
 
-int pointMapToPixel(int x) {
+int PointMapToPixel(int x) {
     return MAP_SCALE * x + MAP_MARGIN;
 }
 
@@ -34,10 +26,10 @@ void DrawMap(Map *map, SDL_Renderer *renderer) {
     for(int i = 0; i < map->wall_count; i++)
         thickLineRGBA(
                 renderer,
-                pointMapToPixel(map->walls[i].x1),
-                pointMapToPixel(map->walls[i].y1),
-                pointMapToPixel(map->walls[i].x2),
-                pointMapToPixel(map->walls[i].y2),
+                PointMapToPixel(map->walls[i].x1),
+                PointMapToPixel(map->walls[i].y1),
+                PointMapToPixel(map->walls[i].x2),
+                PointMapToPixel(map->walls[i].y2),
                 WALL_WIDTH, 0, 0, 0, 255);
 }
 

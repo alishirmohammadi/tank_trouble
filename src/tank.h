@@ -9,9 +9,9 @@
 #include "bullet.h"
 #define TANK_RADIUS 15
 #define TANK_GUN_LENGTH 23
-#define ROTATE_SPEED 0.07
-#define FORWRD_SPEED 2
-#define BACKWARD_SPEED 1
+#define ROTATE_SPEED 0.035
+#define FORWRD_SPEED 1
+#define BACKWARD_SPEED 0.5
 //
 // Created by ali on 16/12/18.
 //

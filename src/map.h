@@ -12,7 +12,7 @@
 
 void LoadMap(Map *map, char *src);
 void DrawMap(Map *map, SDL_Renderer *renderer);
-int pointMapToPixel(int x);
+int PointMapToPixel(int x);
 int maxMapY(Map *map);
 int maxMapX(Map *map);
 

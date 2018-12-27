@@ -57,27 +57,27 @@ int main() {
     tanks[2].fire_key = KEY_M;
     tanks[2].angle = 0;
 
-    LoadMap(&map, "/home/ali/Desktop/1.txt");
+    LoadMap(&map, "/home/ali/Desktop/test.txt");
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow(
             "Alter Tank",
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
-            pointMapToPixel(maxMapX(&map)) + MAP_MARGIN + 100,
-            pointMapToPixel(maxMapY(&map)) + MAP_MARGIN,
+            PointMapToPixel(maxMapX(&map)) + MAP_MARGIN + 100,
+            PointMapToPixel(maxMapY(&map)) + MAP_MARGIN,
             SDL_WINDOW_OPENGL
     );
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    const double FPS = 60;
+    const double FPS = 100;
     while (handleEvents() != EXIT) {
         int start_ticks = SDL_GetTicks();
 
         SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
     	SDL_RenderClear(renderer);
 
-        physics_renderer(tanks, TANKS_COUNT, &map);
+        PhysicsRenderer(tanks, TANKS_COUNT, &map);
         DrawMap(&map, renderer);
         DrawTank(tanks, TANKS_COUNT, renderer);
         DrawTanksBullets(tanks, TANKS_COUNT, renderer);
