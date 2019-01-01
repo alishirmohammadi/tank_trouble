@@ -106,13 +106,13 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
                     y1 = PointMapToPixel(min(map->walls[k].y1, map->walls[k].y2));
                     y2 = PointMapToPixel(max(map->walls[k].y1, map->walls[k].y2));
                     if(x1 == x2) {
-                        if(y >= y1 && y <= y2) {
-                            if((newX <= x1 && x >= x2) || (newX >= x1 && x <= x1))
+                        if(y >= y1 - WALL_WIDTH / 2 && y <= y2 + WALL_WIDTH / 2) {
+                            if((newX <= x1 + WALL_WIDTH / 2 && x >= x2 + WALL_WIDTH / 2) || (newX >= x1 - WALL_WIDTH / 2 && x <= x1 - WALL_WIDTH / 2))
                                 tanks[i].bullets[j].vx *= -1;
                         }
                     } else if(y1 == y2) {
-                        if(x >= x1 && x <= x2) {
-                            if((newY <= y1 && y >= y1) || (newY >= y1 && y <= y1))
+                        if(x >= x1 - WALL_WIDTH / 2 && x <= x2 + WALL_WIDTH / 2) {
+                            if((newY <= y1 + WALL_WIDTH / 2 && y >= y1 + WALL_WIDTH / 2) || (newY >= y1 - WALL_WIDTH / 2 && y <= y1 - WALL_WIDTH / 2))
                                 tanks[i].bullets[j].vy *= -1;
                         }
                     }

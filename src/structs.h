@@ -19,7 +19,7 @@ typedef struct {
 } Color;
 
 typedef struct {
-    int x1, x2, y1, y2;
+    int x1, y1, x2, y2;
 } Wall;
 
 typedef struct {

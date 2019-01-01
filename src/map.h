@@ -15,5 +15,6 @@ void DrawMap(Map *map, SDL_Renderer *renderer);
 int PointMapToPixel(int x);
 int maxMapY(Map *map);
 int maxMapX(Map *map);
+void mapGenerator(Map *map);
 
 #endif //ALTER_TANK_MAP_H

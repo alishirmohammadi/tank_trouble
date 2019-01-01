@@ -57,7 +57,8 @@ int main() {
     tanks[2].fire_key = KEY_M;
     tanks[2].angle = 0;
 
-    LoadMap(&map, "/home/ali/Desktop/test.txt");
+    //LoadMap(&map, "/home/ali/Desktop/1.txt");
+    mapGenerator(&map);
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow(
