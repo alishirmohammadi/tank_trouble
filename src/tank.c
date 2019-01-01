@@ -41,9 +41,31 @@ void TankBackwardY(Tank *tank) {
 
 void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
     for(int i = 0; i < count; i++) {
-        filledCircleRGBA(renderer, tank[i].x, tank[i].y, TANK_RADIUS, tank[i].color.red, tank[i].color.green, tank[i].color.blue, tank[i].color.alpha);
-        circleRGBA(renderer, tank[i].x, tank[i].y, TANK_RADIUS, 0, 0, 0, 255);
-        circleRGBA(renderer, tank[i].x, tank[i].y, TANK_RADIUS-1, 0, 0, 0, 255);
-        thickLineRGBA(renderer, tank[i].x, tank[i].y, tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle), tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle), 7, tank[i].color.red, tank[i].color.green, tank[i].color.blue, 255);
+        filledCircleRGBA(
+                renderer,
+                tank[i].x,
+                tank[i].y,
+                TANK_RADIUS,
+                tank[i].color.red,
+                tank[i].color.green,
+                tank[i].color.blue,
+                tank[i].color.alpha);
+        filledCircleRGBA(
+                renderer,
+                tank[i].x,
+                tank[i].y,
+                TANK_RADIUS/2,
+                0,
+                0,
+                0,
+                tank[i].color.alpha);
+        thickLineRGBA(
+                renderer,
+                tank[i].x + (TANK_RADIUS - 1) * cos(tank[i].angle),
+                tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
+                tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle),
+                tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle),
+                4, 0, 0, 0, 255);
+
     }
 }

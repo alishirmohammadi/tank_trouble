@@ -25,12 +25,13 @@ double magnitude(double x, double y) {
     return sqrt(x * x + y * y);
 }
 
-bool collision(Tank *tank, double newX, double newY, int x1, int y1, int x2, int y2) {
+bool collision(Tank *tank, double newX, double newY, double x1, double y1, double x2, double y2) {
+    double x = tank->x, y = tank->y;
     if(x1 == x2) {
-        if((newY >= y1 - TANK_RADIUS && newY <= y2 + TANK_RADIUS) && ((tank->x >= x1 + TANK_RADIUS && newX <= x1 + TANK_RADIUS) || (tank->x <= x1 - TANK_RADIUS && newX >= x1 - TANK_RADIUS)))
+        if((newY >= y1 - TANK_RADIUS && newY <= y2 + TANK_RADIUS) && ((x >= x1 + TANK_RADIUS && newX <= x1 + TANK_RADIUS) || (x <= x1 - TANK_RADIUS && newX >= x1 - TANK_RADIUS)))
             return true;
     } else if(y1 == y2) {
-        if((newX >= x1 - TANK_RADIUS && newX <= x2 + TANK_RADIUS) && ((tank->y >= y1 + TANK_RADIUS && newY <= y1 + TANK_RADIUS) || (tank->y <= y1 - TANK_RADIUS && newY >= y1 - TANK_RADIUS)))
+        if((newX >= x1 - TANK_RADIUS && newX <= x2 + TANK_RADIUS) && ((y >= y1 + TANK_RADIUS && newY <= y1 + TANK_RADIUS) || (y <= y1 - TANK_RADIUS && newY >= y1 - TANK_RADIUS)))
             return true;
     }
     return false;
@@ -43,13 +44,15 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
         if(getKeyState(tanks[i].left_key))
             TankRotateRight(&tanks[i]);
         if(getKeyState(tanks[i].forward_key)) {
-            double newX = tanks[i].x + cos(tanks[i].angle) * FORWRD_SPEED;
-            double newY = tanks[i].y + cos(tanks[i].angle) * FORWRD_SPEED;
+            Tank temp = tanks[i];
+            TankForwardX(&temp);
+            TankForwardY(&temp);
+            double newX = temp.x;
+            double newY = temp.y;
             double x = tanks[i].x;
             double y = tanks[i].y;
             bool CanChangeX = true;
             bool CanChangeY = true;
-            int a = 0, b = 0;
             for(int j = 0; j < map->wall_count; j++) {
                 double x1 = PointMapToPixel(min(map->walls[j].x1, map->walls[j].x2));
                 double x2 = PointMapToPixel(max(map->walls[j].x1, map->walls[j].x2));
@@ -63,18 +66,15 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
                     CanChangeY = false;
                 }
                 if (x1 == x2) {
-                    a++;
                     if(collision(&tanks[i], newX, newY, x1, y1, x2, y2)) {
                         CanChangeX = false;
                     }
                 } else if(y1 == y2) {
-                    b++;
                     if(collision(&tanks[i], newX, newY, x1, y1, x2, y2)) {
                         CanChangeY = false;
                     }
                 }
             }
-            //printf("%d   %d", a, b);
             if(CanChangeX)
                 TankForwardX(&tanks[i]);
             if(CanChangeY)

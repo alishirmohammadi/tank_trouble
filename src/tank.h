@@ -8,7 +8,7 @@
 #include "colors.h"
 #include "bullet.h"
 #define TANK_RADIUS 15
-#define TANK_GUN_LENGTH 23
+#define TANK_GUN_LENGTH 20
 #define ROTATE_SPEED 0.035
 #define FORWRD_SPEED 1
 #define BACKWARD_SPEED 0.5
