@@ -69,7 +69,11 @@ void PrintMap(bool map[][10]) {
 }
 
 bool ValidMap(bool map[][10]) {
-
+    for(int i = 0; i < 10; i++)
+        for(int j = 0; j < 10; j++)
+            if(map[i][j] == true)
+                return false;
+    return true;
 }
 
 void mapRouteSearch(Wall walls[], int k, bool map[][10], int x, int y) {
@@ -131,31 +135,41 @@ void EmptyMap(bool map[][10]) {
 }
 
 void mapGenerator(Map *MAP) {
-    int m = 10, n = 10;
     srand(time(NULL));
+
     Wall walls[100];
-
-    bool map[10][10];
-    EmptyMap(map);
-
+    int last_wall = 3;
     walls[0] = new_Wall(0, 0, 10, 0);
     walls[1] = new_Wall(0, 0, 0, 10);
     walls[2] = new_Wall(10, 0, 10, 10);
     walls[3] = new_Wall(0, 10, 10, 10);
 
-    walls[4] = new_Wall(1, 1, 1, 9);
-    walls[5] = new_Wall(1, 1, 4, 1);
-    walls[6] = new_Wall(1, 9, 9, 9);
-    walls[7] = new_Wall(9, 1, 9, 9);
-    walls[8] = new_Wall(5, 1, 9, 1);
-    walls[9] = new_Wall(2, 2, 8, 2);
-    walls[10] = new_Wall(8, 1, 8, 9);
+    for(int i = 0; i < 100; i++) {
+        int x1, x2, y1, y2;
+        x1 = rand() % 10;
+        y1 = rand() % 10;
+        x2 = rand() % 10;
+        y2 = rand() % 10;
+        if(rand() % 2) {
+            y2 = y1;
+        } else {
+            x2 = x1;
+        }
+        if(x1 == x2 && y1 == y2)
+            continue;
 
-    int last_wall = 11;
-    mapRouteSearch(walls, last_wall, map, 0, 0);
-    PrintMap(map);
+        walls[last_wall + 1] = new_Wall(x1, y1, x2, y2);
+        bool map_test[10][10];
+        EmptyMap(map_test);
+        mapRouteSearch(walls, last_wall + 1, map_test, 0, 0);
+        PrintMap(map_test);
+        printf("_________________________________\n");
+        scanf("%*c");
+        if(ValidMap(map_test))
+            last_wall++;
+    }
 
     MAP->wall_count = last_wall;
-    for(int i = 0; i < last_wall; i++)
+    for(int i = 0; i <= last_wall; i++)
         MAP->walls[i] = walls[i];
 }
