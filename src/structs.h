@@ -51,7 +51,8 @@ typedef enum {
     Play2v2,
     Play3v3,
     About,
-    Exit
+    Exit,
+    None
 } Action;
 
 typedef struct {

@@ -14,6 +14,6 @@
 #define BUTTON_COUNT 4
 
 void InitializeGame(Manager *manager);
-void GameMenu(Manager *manager);
+Action GameMenu(Manager *manager);
 
 #endif //ALTER_TANK_MANAGER_H

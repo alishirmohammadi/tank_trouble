@@ -7,13 +7,20 @@
 #include "tank.h"
 #include <time.h>
 
-const int EXIT = 12345;
-
-int handleEvents(Manager *manager) {
+Action gameHandleEvent() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT)
-            return EXIT;
+            return Exit;
+        handleKeyboard(event);
+    }
+}
+
+Action handleEvents(Manager *manager) {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT)
+            return Exit;
         if (event.type == SDL_MOUSEBUTTONDOWN) {
             int x, y;
             SDL_GetMouseState(&x, &y);
@@ -28,13 +35,15 @@ int handleEvents(Manager *manager) {
             int x, y;
             SDL_GetMouseState(&x, &y);
             for(int i = 0; i < BUTTON_COUNT; i++) {
+                if(manager->button[i].state == Pressed && x > BUTTON_RIGHTMARGIN && x < SCREEN_WIDTH - BUTTON_RIGHTMARGIN && y > BUTTON_TOP + BUTTON_DISTANCE * i - BUTTON_WIDTH && y < BUTTON_TOP + BUTTON_DISTANCE * i + BUTTON_WIDTH)
+                    return manager->button[i].action;
                 manager->button[i].state == Idle;
                 manager->button[i].state = x > BUTTON_RIGHTMARGIN && x < SCREEN_WIDTH - BUTTON_RIGHTMARGIN && y > BUTTON_TOP + BUTTON_DISTANCE * i - BUTTON_WIDTH && y < BUTTON_TOP + BUTTON_DISTANCE * i + BUTTON_WIDTH
                                            ? Hover : Idle;
             }
         }
-        handleKeyboard(event);
     }
+    return None;
 }
 
 void DrawButton(SDL_Renderer *renderer, Button buttons[]) {
@@ -82,10 +91,11 @@ void DrawButton(SDL_Renderer *renderer, Button buttons[]) {
     }
 }
 
-void GameMenu(Manager *manager) {
+Action GameMenu(Manager *manager) {
     manager->tank_count = 3;
 
     strcpy(manager->button[0].text, "2 Players");
+    manager->button[0].action = Play2v2;
     manager->button[0].color = COLOR_BUTTON;
     manager->button[0].hover_color = COLOR_BUTTON_HOVER;
     manager->button[0].pressed_color = COLOR_BUTTON_PRESSED;
@@ -93,6 +103,7 @@ void GameMenu(Manager *manager) {
     manager->button[0].state = Idle;
 
     strcpy(manager->button[1].text, "3 Players");
+    manager->button[1].action = Play3v3;
     manager->button[1].color = COLOR_BUTTON;
     manager->button[1].hover_color = COLOR_BUTTON_HOVER;
     manager->button[1].pressed_color = COLOR_BUTTON_PRESSED;
@@ -100,6 +111,7 @@ void GameMenu(Manager *manager) {
     manager->button[1].state = Idle;
 
     strcpy(manager->button[2].text, "About Game");
+    manager->button[2].action = About;
     manager->button[2].color = COLOR_BUTTON;
     manager->button[2].hover_color = COLOR_BUTTON_HOVER;
     manager->button[2].pressed_color = COLOR_BUTTON_PRESSED;
@@ -107,6 +119,7 @@ void GameMenu(Manager *manager) {
     manager->button[2].state = Idle;
 
     strcpy(manager->button[3].text, "Quit");
+    manager->button[3].action = Exit;
     manager->button[3].color = COLOR_BUTTON;
     manager->button[3].hover_color = COLOR_BUTTON_HOVER;
     manager->button[3].pressed_color = COLOR_BUTTON_PRESSED;
@@ -129,8 +142,14 @@ void GameMenu(Manager *manager) {
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+    Action action;
+
     const double FPS = 100;
-    while (handleEvents(manager) != EXIT) {
+    while (true) {
+        action = handleEvents(manager);
+        if(action == Exit || action == Play2v2 || action == Play3v3)
+            break;
+
         int start_ticks = SDL_GetTicks();
 
         SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
@@ -157,6 +176,8 @@ void GameMenu(Manager *manager) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+
+    return action;
 }
 
 void InitializeGame(Manager *manager) {
@@ -212,7 +233,7 @@ void InitializeGame(Manager *manager) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     const double FPS = 100;
-    while (handleEvents(manager) != EXIT) {
+    while (gameHandleEvent() != Exit) {
         int start_ticks = SDL_GetTicks();
 
         SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
