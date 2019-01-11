@@ -8,11 +8,8 @@
 #define KEY_S 7
 #define KEY_F 8
 #define KEY_Q 9
-#define KEY_0 10
-#define KEY_4 11
-#define KEY_5 12
-#define KEY_6 13
-#define KEY_8 14
+#define KEY_A 10
+#define KEY_W 11
 #define KEY_U 15
 #define KEY_J 16
 #define KEY_H 17

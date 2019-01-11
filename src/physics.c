@@ -39,11 +39,11 @@ bool collision(Tank *tank, double newX, double newY, double x1, double y1, doubl
 
 void PhysicsRenderer(Tank *tanks, int count, Map *map) {
     for(int i = 0; i < count; i++) {
-        if(getKeyState(tanks[i].right_key))
+        if(getKeyState(tanks[i].right_key) && tanks[i].enable)
             TankRotateLeft(&tanks[i]);
-        if(getKeyState(tanks[i].left_key))
+        if(getKeyState(tanks[i].left_key) && tanks[i].enable)
             TankRotateRight(&tanks[i]);
-        if(getKeyState(tanks[i].forward_key)) {
+        if(getKeyState(tanks[i].forward_key) && tanks[i].enable) {
             Tank temp = tanks[i];
             TankForwardX(&temp);
             TankForwardY(&temp);
@@ -80,7 +80,44 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
             if(CanChangeY)
                 TankForwardY(&tanks[i]);
         }
-        if(getKeyState(tanks[i].fire_key)) {
+        if(getKeyState(tanks[i].backward_key) && tanks[i].enable) {
+            Tank temp = tanks[i];
+            TankBackwardX(&temp);
+            TankBackwardY(&temp);
+            double newX = temp.x;
+            double newY = temp.y;
+            double x = tanks[i].x;
+            double y = tanks[i].y;
+            bool CanChangeX = true;
+            bool CanChangeY = true;
+            for(int j = 0; j < map->wall_count; j++) {
+                double x1 = PointMapToPixel(min(map->walls[j].x1, map->walls[j].x2));
+                double x2 = PointMapToPixel(max(map->walls[j].x1, map->walls[j].x2));
+                double y1 = PointMapToPixel(min(map->walls[j].y1, map->walls[j].y2));
+                double y2 = PointMapToPixel(max(map->walls[j].y1, map->walls[j].y2));
+                if (magnitude(newX - x1, newY - y1) <= TANK_RADIUS && magnitude(newX - x1, newY - y1) <= magnitude(x - x1, y - y1)) {
+                    CanChangeX = false;
+                    CanChangeY = false;
+                } else if (magnitude(newX - x2, newY - y2) <= TANK_RADIUS && magnitude(newX - x2, newY - y2) <= magnitude(x - x1, y - y1)) {
+                    CanChangeX = false;
+                    CanChangeY = false;
+                }
+                if (x1 == x2) {
+                    if(collision(&tanks[i], newX, newY, x1, y1, x2, y2)) {
+                        CanChangeX = false;
+                    }
+                } else if(y1 == y2) {
+                    if(collision(&tanks[i], newX, newY, x1, y1, x2, y2)) {
+                        CanChangeY = false;
+                    }
+                }
+            }
+            if(CanChangeX)
+                TankBackwardX(&tanks[i]);
+            if(CanChangeY)
+                TankBackwardY(&tanks[i]);
+        }
+        if(getKeyState(tanks[i].fire_key) && tanks[i].enable) {
             int j = 0;
             for(; j < BULLET_COUNT && tanks[i].bullets[j].enabled; j++);
             if(j != BULLET_COUNT) {

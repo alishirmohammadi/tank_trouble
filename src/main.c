@@ -29,6 +29,7 @@ int handleEvents() {
 int main() {
     tanks[0].x = 100;
     tanks[0].y = 100;
+    tanks[0].enable = true;
     tanks[0].color = COLOR_RED;
     tanks[0].right_key = KEY_RIGHT;
     tanks[0].left_key = KEY_LEFT;
@@ -39,16 +40,18 @@ int main() {
 
     tanks[1].x = 230;
     tanks[1].y = 230;
+    tanks[1].enable = true;
     tanks[1].color = COLOR_BLUE;
-    tanks[1].right_key = KEY_F;
-    tanks[1].left_key = KEY_S;
-    tanks[1].forward_key = KEY_E;
-    tanks[1].backward_key = KEY_D;
+    tanks[1].right_key = KEY_D;
+    tanks[1].left_key = KEY_A;
+    tanks[1].forward_key = KEY_W;
+    tanks[1].backward_key = KEY_S;
     tanks[1].fire_key = KEY_Q;
     tanks[1].angle = 0;
 
     tanks[2].x = 100;
     tanks[2].y = 230;
+    tanks[2].enable = true;
     tanks[2].color = COLOR_GREEN;
     tanks[2].right_key = KEY_K;
     tanks[2].left_key = KEY_H;
@@ -57,8 +60,8 @@ int main() {
     tanks[2].fire_key = KEY_M;
     tanks[2].angle = 0;
 
-    //LoadMap(&map, "/home/ali/Desktop/1.txt");
-    mapGenerator(&map);
+    LoadMap(&map, "/home/ali/Desktop/1.txt");
+    // mapGenerator(&map);
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow(

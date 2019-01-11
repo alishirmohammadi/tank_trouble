@@ -41,6 +41,8 @@ void TankBackwardY(Tank *tank) {
 
 void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
     for(int i = 0; i < count; i++) {
+        if(!tank[i].enable)
+            continue;
         filledCircleRGBA(
                 renderer,
                 tank[i].x,
@@ -68,4 +70,8 @@ void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
                 4, 0, 0, 0, 255);
 
     }
+}
+
+void DestroyTank(Tank *tank) {
+    tank->enable = false;
 }

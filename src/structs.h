@@ -33,6 +33,7 @@ typedef struct {
     Color color;
     double angle;
     Bullet bullets[BULLET_COUNT];
+    bool enable;
     int forward_key, backward_key, right_key, left_key, fire_key;
 } Tank;
 

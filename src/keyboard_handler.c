@@ -31,6 +31,8 @@ void handleKeyboard(SDL_Event event) {
         if(event.key.keysym.sym == SDLK_h) keyboard[KEY_H] = keyValue;
         if(event.key.keysym.sym == SDLK_t) keyboard[KEY_T] = keyValue;
         if(event.key.keysym.sym == SDLK_k) keyboard[KEY_K] = keyValue;
+        if(event.key.keysym.sym == SDLK_w) keyboard[KEY_W] = keyValue;
+        if(event.key.keysym.sym == SDLK_a) keyboard[KEY_A] = keyValue;
         if(event.key.keysym.sym == SDLK_SLASH) keyboard[KEY_SLASH] = keyValue;
     }
 }

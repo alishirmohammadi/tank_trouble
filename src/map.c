@@ -164,7 +164,6 @@ void mapGenerator(Map *MAP) {
         mapRouteSearch(walls, last_wall + 1, map_test, 0, 0);
         PrintMap(map_test);
         printf("_________________________________\n");
-        scanf("%*c");
         if(ValidMap(map_test))
             last_wall++;
     }
