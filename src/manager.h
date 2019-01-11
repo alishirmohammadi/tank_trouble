@@ -9,9 +9,10 @@
 #define BUTTON_TOP BUTTON_WIDTH + 20
 #define BUTTON_RIGHTMARGIN 20
 #define BUTTON_WIDTH 30
-#define SCREEN_HEIGHT 310
+#define SCREEN_HEIGHT 380
 #define SCREEN_WIDTH 300
-#define BUTTON_COUNT 4
+#define BUTTON_COUNT 5
+#define SMOKE_COUNT 20
 
 void InitializeGame(Manager *manager);
 Action GameMenu(Manager *manager);

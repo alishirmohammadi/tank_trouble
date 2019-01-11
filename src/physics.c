@@ -11,6 +11,7 @@
 #include "colors.h"
 #include "physics.h"
 #include "structs.h"
+#include "particle.h"
 
 
 int min(int a, int b) {
@@ -37,7 +38,21 @@ bool collision(Tank *tank, double newX, double newY, double x1, double y1, doubl
     return false;
 }
 
-void PhysicsRenderer(Tank *tanks, int count, Map *map) {
+void SmokeRenderer(Smoke smoke[], int count) {
+    for(int i = 0; i < count; i++) {
+        if(!smoke[i].enable)
+            continue;
+        for(int j = 0; j < smoke[i].particle_count; j++) {
+            smoke[i].particles[j].x += smoke[i].particles[j].dx;
+            smoke[i].particles[j].y += smoke[i].particles[j].dy;
+            smoke[i].particles[j].radius += smoke[i].particles[j].radius_speed;
+        }
+        if(SDL_GetTicks() - smoke[i].instantiate_time > MAX_PARTICLE_LIFETIME)
+            smoke[i].enable = false;
+    }
+}
+
+void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_count) {
     for(int i = 0; i < count; i++) {
         if(getKeyState(tanks[i].right_key) && tanks[i].enable)
             TankRotateLeft(&tanks[i]);
@@ -119,11 +134,11 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
         }
         if(getKeyState(tanks[i].fire_key) && tanks[i].enable) {
             int j = 0;
-            for(; j < BULLET_COUNT && tanks[i].bullets[j].enabled; j++);
+            for(; j < BULLET_COUNT && tanks[i].bullets[j].state != Disable; j++);
             if(j != BULLET_COUNT) {
-                tanks[i].bullets[j].enabled = true;
-                tanks[i].bullets[j].x = tanks[i].x;
-                tanks[i].bullets[j].y = tanks[i].y;
+                tanks[i].bullets[j].state = Enable;
+                tanks[i].bullets[j].x = tanks[i].x + cos(tanks[i].angle) * (TANK_RADIUS - 2);
+                tanks[i].bullets[j].y = tanks[i].y + sin(tanks[i].angle) * (TANK_RADIUS - 2);
                 tanks[i].bullets[j].vx = cos(tanks[i].angle);
                 tanks[i].bullets[j].vy = sin(tanks[i].angle);
                 tanks[i].bullets[j].instantiate_time = SDL_GetTicks();
@@ -131,7 +146,7 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
             }
         }
         for(int j = 0; j < BULLET_COUNT; j++) {
-            if(tanks[i].bullets[j].enabled) {
+            if(tanks[i].bullets[j].state != Disable) {
                 double x = tanks[i].bullets[j].x;
                 double y = tanks[i].bullets[j].y;
                 double newX = x + tanks[i].bullets[j].vx * BULLET_SPEED;
@@ -156,10 +171,25 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map) {
                 }
                 MoveBullet(&tanks[i].bullets[j]);
                 if(SDL_GetTicks() - tanks[i].bullets[j].instantiate_time > BULLET_LIFETIME * 1000)
-                    tanks[i].bullets[j].enabled = false;
+                    tanks[i].bullets[j].state = FadeOut;
+                if(SDL_GetTicks() - tanks[i].bullets[j].instantiate_time > (BULLET_LIFETIME + BULLET_FADE_TIME) * 1000)
+                    tanks[i].bullets[j].state = Disable;
+            }
+            if(tanks[i].bullets[j].state == Enable) {
+                for(int k = 0; k < count; k++) {
+                    if(tanks[k].enable == false)
+                        continue;
+                    if(magnitude(tanks[k].x - tanks[i].bullets[j].x, tanks[k].y - tanks[i].bullets[j].y) < TANK_RADIUS - BULLET_RADIUS) {
+                        tanks[i].bullets[j].state = Disable;
+                        DestroyTank(&tanks[k]);
+                        int disableSmokeId = 0;
+                        while(disableSmokeId < smoke_count && smoke[disableSmokeId].enable == true)
+                            disableSmokeId++;
+                        RandomSmoke(&smoke[disableSmokeId], tanks[k].x, tanks[k].y);
+                    }
+                }
             }
         }
     }
-
 
 }

@@ -312,6 +312,33 @@ src/map.c.s:
 	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/map.c.s
 .PHONY : src/map.c.s
 
+src/particle.o: src/particle.c.o
+
+.PHONY : src/particle.o
+
+# target to build an object file
+src/particle.c.o:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/particle.c.o
+.PHONY : src/particle.c.o
+
+src/particle.i: src/particle.c.i
+
+.PHONY : src/particle.i
+
+# target to preprocess a source file
+src/particle.c.i:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/particle.c.i
+.PHONY : src/particle.c.i
+
+src/particle.s: src/particle.c.s
+
+.PHONY : src/particle.s
+
+# target to generate assembly for a file
+src/particle.c.s:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/particle.c.s
+.PHONY : src/particle.c.s
+
 src/physics.o: src/physics.c.o
 
 .PHONY : src/physics.o
@@ -423,6 +450,9 @@ help:
 	@echo "... src/map.o"
 	@echo "... src/map.i"
 	@echo "... src/map.s"
+	@echo "... src/particle.o"
+	@echo "... src/particle.i"
+	@echo "... src/particle.s"
 	@echo "... src/physics.o"
 	@echo "... src/physics.i"
 	@echo "... src/physics.s"

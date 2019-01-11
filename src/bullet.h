@@ -8,6 +8,7 @@
 #define BULLET_RADIUS 2.5
 #define BULLET_COLOR COLOR_BLACK
 #define BULLET_LIFETIME 15
+#define BULLET_FADE_TIME 0.6
 
 #include "structs.h"
 #include "stdbool.h"

@@ -28,4 +28,6 @@ void TankForwardX(Tank *tank);
 void TankBackwardX(Tank *tank);
 void TankForwardY(Tank *tank);
 void TankBackwardY(Tank *tank);
+void TankRandomPosition(Tank *tank, int maxX, int maxY);
+void DestroyTank(Tank *tank);
 void DrawTank(Tank tank[], int count, SDL_Renderer *renderer);

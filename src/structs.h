@@ -8,10 +8,14 @@
 #include <stdbool.h>
 #define BULLET_COUNT 5
 
+typedef enum {
+    Enable, Disable, FadeOut
+} BulletState;
+
 typedef struct {
     double x, y, vx, vy;
     double instantiate_time;
-    bool enabled;
+    BulletState state;
 } Bullet;
 
 typedef struct {
@@ -34,6 +38,7 @@ typedef struct {
     double angle;
     Bullet bullets[BULLET_COUNT];
     bool enable;
+    int score;
     int forward_key, backward_key, right_key, left_key, fire_key;
 } Tank;
 
@@ -51,6 +56,7 @@ typedef enum {
     Play2v2,
     Play3v3,
     About,
+    Help,
     Exit,
     None
 } Action;
@@ -68,5 +74,20 @@ typedef struct {
     Tank tanks[5];
     Button button[5];
 } Manager;
+
+typedef struct {
+    Color color;
+    float life_time;
+    float radius, radius_speed;
+    float x, y, dx, dy;
+} Particle;
+
+typedef struct {
+    Particle particles[30];
+    int particle_count;
+    int x, y;
+    int instantiate_time;
+    bool enable;
+} Smoke;
 
 #endif //ALTER_TANK_STRUCTS_H

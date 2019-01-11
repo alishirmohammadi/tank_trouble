@@ -119,6 +119,12 @@
 		<Unit filename="/home/ali/Documents/fop/project/src/map.h">
 			<Option target="alter_tank"/>
 		</Unit>
+		<Unit filename="/home/ali/Documents/fop/project/src/particle.c">
+			<Option target="alter_tank"/>
+		</Unit>
+		<Unit filename="/home/ali/Documents/fop/project/src/particle.h">
+			<Option target="alter_tank"/>
+		</Unit>
 		<Unit filename="/home/ali/Documents/fop/project/src/physics.c">
 			<Option target="alter_tank"/>
 		</Unit>

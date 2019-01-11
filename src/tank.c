@@ -1,11 +1,13 @@
 #include "tank.h"
 #include "bullet.h"
+#include "map.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+#include <time.h>
 //
 // Created by ali on 16/12/18.
 //
@@ -68,8 +70,14 @@ void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
                 tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle),
                 tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle),
                 4, 0, 0, 0, 255);
-
     }
+}
+
+void TankRandomPosition(Tank *tank, int maxX, int maxY) {
+    srand(time(NULL));
+
+    tank->x = PointMapToPixel(rand() % (maxX - 1) + 0.5);
+    tank->y = PointMapToPixel(rand() % (maxY - 1) + 0.5);
 }
 
 void DestroyTank(Tank *tank) {

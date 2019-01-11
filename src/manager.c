@@ -5,6 +5,7 @@
 #include "map.h"
 #include "physics.h"
 #include "tank.h"
+#include "particle.h"
 #include <time.h>
 
 Action gameHandleEvent() {
@@ -35,9 +36,11 @@ Action handleEvents(Manager *manager) {
             int x, y;
             SDL_GetMouseState(&x, &y);
             for(int i = 0; i < BUTTON_COUNT; i++) {
-                if(manager->button[i].state == Pressed && x > BUTTON_RIGHTMARGIN && x < SCREEN_WIDTH - BUTTON_RIGHTMARGIN && y > BUTTON_TOP + BUTTON_DISTANCE * i - BUTTON_WIDTH && y < BUTTON_TOP + BUTTON_DISTANCE * i + BUTTON_WIDTH)
+                if(manager->button[i].state == Pressed && x > BUTTON_RIGHTMARGIN && x < SCREEN_WIDTH - BUTTON_RIGHTMARGIN && y > BUTTON_TOP + BUTTON_DISTANCE * i - BUTTON_WIDTH && y < BUTTON_TOP + BUTTON_DISTANCE * i + BUTTON_WIDTH) {
+                    manager->button[i].state = x > BUTTON_RIGHTMARGIN && x < SCREEN_WIDTH - BUTTON_RIGHTMARGIN && y > BUTTON_TOP + BUTTON_DISTANCE * i - BUTTON_WIDTH && y < BUTTON_TOP + BUTTON_DISTANCE * i + BUTTON_WIDTH
+                                               ? Hover : Idle;
                     return manager->button[i].action;
-                manager->button[i].state == Idle;
+                }
                 manager->button[i].state = x > BUTTON_RIGHTMARGIN && x < SCREEN_WIDTH - BUTTON_RIGHTMARGIN && y > BUTTON_TOP + BUTTON_DISTANCE * i - BUTTON_WIDTH && y < BUTTON_TOP + BUTTON_DISTANCE * i + BUTTON_WIDTH
                                            ? Hover : Idle;
             }
@@ -118,13 +121,21 @@ Action GameMenu(Manager *manager) {
     manager->button[2].text_color = COLOR_BLACK;
     manager->button[2].state = Idle;
 
-    strcpy(manager->button[3].text, "Quit");
-    manager->button[3].action = Exit;
+    strcpy(manager->button[3].text, "Help");
+    manager->button[3].action = Help;
     manager->button[3].color = COLOR_BUTTON;
     manager->button[3].hover_color = COLOR_BUTTON_HOVER;
     manager->button[3].pressed_color = COLOR_BUTTON_PRESSED;
     manager->button[3].text_color = COLOR_BLACK;
     manager->button[3].state = Idle;
+
+    strcpy(manager->button[4].text, "Quit");
+    manager->button[4].action = Exit;
+    manager->button[4].color = COLOR_BUTTON;
+    manager->button[4].hover_color = COLOR_BUTTON_HOVER;
+    manager->button[4].pressed_color = COLOR_BUTTON_PRESSED;
+    manager->button[4].text_color = COLOR_BLACK;
+    manager->button[4].state = Idle;
 
 
 
@@ -195,6 +206,9 @@ void InitializeGame(Manager *manager) {
     manager->tanks[0].backward_key = KEY_DOWN;
     manager->tanks[0].fire_key = KEY_SLASH;
     manager->tanks[0].angle = rand() % 31415 / 500.0;
+    manager->tanks[0].score = 0;
+    for(int i = 0; i < BULLET_COUNT; i++)
+        manager->tanks[0].bullets[i].state = Disable;
 
     manager->tanks[1].x = PointMapToPixel(rand() % (maxMapX(&manager->map) - 1) + 0.5);
     manager->tanks[1].y = PointMapToPixel(rand() % (maxMapY(&manager->map) - 1) + 0.5);
@@ -206,6 +220,9 @@ void InitializeGame(Manager *manager) {
     manager->tanks[1].backward_key = KEY_S;
     manager->tanks[1].fire_key = KEY_Q;
     manager->tanks[1].angle = rand() % 31415 / 500.0;
+    manager->tanks[1].score = 0;
+    for(int i = 0; i < BULLET_COUNT; i++)
+        manager->tanks[1].bullets[i].state = Disable;
 
     manager->tanks[2].x = PointMapToPixel(rand() % (maxMapX(&manager->map) - 1) + 0.5);
     manager->tanks[2].y = PointMapToPixel(rand() % (maxMapY(&manager->map) - 1) + 0.5);
@@ -217,6 +234,14 @@ void InitializeGame(Manager *manager) {
     manager->tanks[2].backward_key = KEY_J;
     manager->tanks[2].fire_key = KEY_M;
     manager->tanks[2].angle = rand() % 31415 / 500.0;
+    manager->tanks[2].score = 0;
+    for(int i = 0; i < BULLET_COUNT; i++)
+        manager->tanks[2].bullets[i].state = Disable;
+
+    Smoke smoke[SMOKE_COUNT];
+    for(int i = 0; i < SMOKE_COUNT; i++) {
+        smoke[i].enable = false;
+    }
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow(
@@ -233,17 +258,20 @@ void InitializeGame(Manager *manager) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     const double FPS = 100;
+
     while (gameHandleEvent() != Exit) {
         int start_ticks = SDL_GetTicks();
 
         SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
         SDL_RenderClear(renderer);
 
-        PhysicsRenderer(manager->tanks, manager->tank_count, &manager->map);
+        PhysicsRenderer(manager->tanks, manager->tank_count, &manager->map, smoke, SMOKE_COUNT);
+        SmokeRenderer(smoke, SMOKE_COUNT);
+
         DrawMap(&manager->map, renderer);
         DrawTank(manager->tanks, manager->tank_count, renderer);
         DrawTanksBullets(manager->tanks, manager->tank_count, renderer);
-
+        DrawSmoke(renderer, smoke, SMOKE_COUNT);
 
         SDL_RenderPresent(renderer);
 
