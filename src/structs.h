@@ -41,10 +41,31 @@ typedef struct{
     char Caption[120];
 } UIButton;
 
+typedef enum {
+    Idle,
+    Hover,
+    Pressed
+} ButtonState;
+
+typedef enum {
+    Play2v2,
+    Play3v3,
+    About,
+    Exit
+} Action;
+
+typedef struct {
+    char text[100];
+    ButtonState state;
+    Color color, hover_color, pressed_color, text_color;
+    Action action;
+} Button;
+
 typedef struct {
     Map map;
     int tank_count;
     Tank tanks[5];
+    Button button[5];
 } Manager;
 
 #endif //ALTER_TANK_STRUCTS_H

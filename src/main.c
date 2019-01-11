@@ -14,6 +14,6 @@
 Manager manager;
 
 int main() {
-    InitializeGame(&manager);
+    GameMenu(&manager);
     return 0;
 }
