@@ -25,6 +25,17 @@ CMakeFiles/alter_tank.dir/src/main.c.o
  /home/ali/Documents/fop/project/src/colors.h
  /home/ali/Documents/fop/project/src/keyboard_handler.h
  /home/ali/Documents/fop/project/src/main.c
+ /home/ali/Documents/fop/project/src/manager.h
+ /home/ali/Documents/fop/project/src/map.h
+ /home/ali/Documents/fop/project/src/physics.h
+ /home/ali/Documents/fop/project/src/structs.h
+ /home/ali/Documents/fop/project/src/tank.h
+CMakeFiles/alter_tank.dir/src/manager.c.o
+ /home/ali/Documents/fop/project/src/bullet.h
+ /home/ali/Documents/fop/project/src/colors.h
+ /home/ali/Documents/fop/project/src/keyboard_handler.h
+ /home/ali/Documents/fop/project/src/manager.c
+ /home/ali/Documents/fop/project/src/manager.h
  /home/ali/Documents/fop/project/src/map.h
  /home/ali/Documents/fop/project/src/physics.h
  /home/ali/Documents/fop/project/src/structs.h

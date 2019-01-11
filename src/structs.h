@@ -37,4 +37,14 @@ typedef struct {
     int forward_key, backward_key, right_key, left_key, fire_key;
 } Tank;
 
+typedef struct{
+    char Caption[120];
+} UIButton;
+
+typedef struct {
+    Map map;
+    int tank_count;
+    Tank tanks[5];
+} Manager;
+
 #endif //ALTER_TANK_STRUCTS_H

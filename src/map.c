@@ -20,7 +20,7 @@ void LoadMap(Map *map, char *src) {
         fscanf(file, "%d %d %d %d\n", &map->walls[i].x1, &map->walls[i].y1, &map->walls[i].x2, &map->walls[i].y2);
 }
 
-int PointMapToPixel(int x) {
+float PointMapToPixel(float x) {
     return MAP_SCALE * x + MAP_MARGIN;
 }
 

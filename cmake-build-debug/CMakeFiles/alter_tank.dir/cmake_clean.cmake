@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/alter_tank.dir/src/graphics.c.o"
   "CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
   "CMakeFiles/alter_tank.dir/src/main.c.o"
+  "CMakeFiles/alter_tank.dir/src/manager.c.o"
   "CMakeFiles/alter_tank.dir/src/map.c.o"
   "CMakeFiles/alter_tank.dir/src/physics.c.o"
   "CMakeFiles/alter_tank.dir/src/structs.c.o"

@@ -258,6 +258,33 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/manager.o: src/manager.c.o
+
+.PHONY : src/manager.o
+
+# target to build an object file
+src/manager.c.o:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/manager.c.o
+.PHONY : src/manager.c.o
+
+src/manager.i: src/manager.c.i
+
+.PHONY : src/manager.i
+
+# target to preprocess a source file
+src/manager.c.i:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/manager.c.i
+.PHONY : src/manager.c.i
+
+src/manager.s: src/manager.c.s
+
+.PHONY : src/manager.s
+
+# target to generate assembly for a file
+src/manager.c.s:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/manager.c.s
+.PHONY : src/manager.c.s
+
 src/map.o: src/map.c.o
 
 .PHONY : src/map.o
@@ -390,6 +417,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/manager.o"
+	@echo "... src/manager.i"
+	@echo "... src/manager.s"
 	@echo "... src/map.o"
 	@echo "... src/map.i"
 	@echo "... src/map.s"

@@ -24,10 +24,21 @@ CMakeFiles/alter_tank.dir/src/main.c.o: ../src/bullet.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/colors.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/keyboard_handler.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/main.c
+CMakeFiles/alter_tank.dir/src/main.c.o: ../src/manager.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/map.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/physics.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/structs.h
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/tank.h
+
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/bullet.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/colors.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/keyboard_handler.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/manager.c
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/manager.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/map.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/physics.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/structs.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/tank.h
 
 CMakeFiles/alter_tank.dir/src/map.c.o: ../src/map.c
 CMakeFiles/alter_tank.dir/src/map.c.o: ../src/map.h

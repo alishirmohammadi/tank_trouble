@@ -107,6 +107,12 @@
 		<Unit filename="/home/ali/Documents/fop/project/src/main.c">
 			<Option target="alter_tank"/>
 		</Unit>
+		<Unit filename="/home/ali/Documents/fop/project/src/manager.c">
+			<Option target="alter_tank"/>
+		</Unit>
+		<Unit filename="/home/ali/Documents/fop/project/src/manager.h">
+			<Option target="alter_tank"/>
+		</Unit>
 		<Unit filename="/home/ali/Documents/fop/project/src/map.c">
 			<Option target="alter_tank"/>
 		</Unit>
