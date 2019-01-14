@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/alter_tank.dir/src/physics.c.o"
   "CMakeFiles/alter_tank.dir/src/structs.c.o"
   "CMakeFiles/alter_tank.dir/src/tank.c.o"
+  "CMakeFiles/alter_tank.dir/src/ui.c.o"
   "alter_tank.pdb"
   "alter_tank"
 )

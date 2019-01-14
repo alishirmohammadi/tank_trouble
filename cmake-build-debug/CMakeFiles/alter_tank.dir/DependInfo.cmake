@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/ali/Documents/fop/project/src/physics.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/physics.c.o"
   "/home/ali/Documents/fop/project/src/structs.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/structs.c.o"
   "/home/ali/Documents/fop/project/src/tank.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/tank.c.o"
+  "/home/ali/Documents/fop/project/src/ui.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/ui.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -6,6 +6,9 @@
 #define ALTER_TANK_STRUCTS_H
 
 #include <stdbool.h>
+#include <SDL_video.h>
+#include <SDL_render.h>
+
 #define BULLET_COUNT 5
 
 typedef enum {
@@ -57,6 +60,7 @@ typedef enum {
     Play3v3,
     About,
     Help,
+    Reload,
     Exit,
     None
 } Action;
@@ -73,6 +77,10 @@ typedef struct {
     int tank_count;
     Tank tanks[5];
     Button button[5];
+    int last_destroy_time;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+
 } Manager;
 
 typedef struct {

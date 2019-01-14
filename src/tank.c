@@ -79,7 +79,3 @@ void TankRandomPosition(Tank *tank, int maxX, int maxY) {
     tank->x = PointMapToPixel(rand() % (maxX - 1) + 0.5);
     tank->y = PointMapToPixel(rand() % (maxY - 1) + 0.5);
 }
-
-void DestroyTank(Tank *tank) {
-    tank->enable = false;
-}

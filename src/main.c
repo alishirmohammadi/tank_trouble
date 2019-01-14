@@ -1,8 +1,20 @@
+#include <SDL.h>
 #include "manager.h"
 
 Manager manager;
 
 int main() {
+    SDL_Init(SDL_INIT_VIDEO);
+    manager.window = SDL_CreateWindow(
+            "Alter Tank",
+            100,
+            30,
+            100,
+            100,
+            SDL_WINDOW_OPENGL
+    );
+    manager.renderer = SDL_CreateRenderer(manager.window, -1, SDL_RENDERER_ACCELERATED);
+
     Action action = GameMenu(&manager);
     if(action == Exit)
         return 0;

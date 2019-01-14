@@ -6,7 +6,9 @@
 #include "physics.h"
 #include "tank.h"
 #include "particle.h"
+#include "ui.h"
 #include <time.h>
+#define RELOAD_TIME 3
 
 Action gameHandleEvent() {
     SDL_Event event;
@@ -19,6 +21,9 @@ Action gameHandleEvent() {
 
 Action handleEvents(Manager *manager) {
     SDL_Event event;
+    manager->tanks[0].score = 0;
+    manager->tanks[1].score = 0;
+    manager->tanks[2].score = 0;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT)
             return Exit;
@@ -95,6 +100,12 @@ void DrawButton(SDL_Renderer *renderer, Button buttons[]) {
 }
 
 Action GameMenu(Manager *manager) {
+    SDL_SetWindowSize(
+            manager->window,
+            SCREEN_WIDTH,
+            SCREEN_HEIGHT
+    );
+
     manager->tank_count = 3;
 
     strcpy(manager->button[0].text, "2 Players");
@@ -137,22 +148,6 @@ Action GameMenu(Manager *manager) {
     manager->button[4].text_color = COLOR_BLACK;
     manager->button[4].state = Idle;
 
-
-
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window* window = SDL_CreateWindow(
-            "Alter Tank",
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            SCREEN_WIDTH,
-            SCREEN_HEIGHT,
-            SDL_WINDOW_OPENGL
-    );
-
-    // SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
     Action action;
 
     const double FPS = 100;
@@ -163,8 +158,8 @@ Action GameMenu(Manager *manager) {
 
         int start_ticks = SDL_GetTicks();
 
-        SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
-        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(manager->renderer, 230, 230, 230, 255);
+        SDL_RenderClear(manager->renderer);
 
         int x, y;
         SDL_GetMouseState(&x, &y);
@@ -177,16 +172,12 @@ Action GameMenu(Manager *manager) {
                 manager->button[i].state = Idle;
         }
 
-        DrawButton(renderer, manager->button);
+        DrawButton(manager->renderer, manager->button);
 
-        SDL_RenderPresent(renderer);
+        SDL_RenderPresent(manager->renderer);
 
         while (SDL_GetTicks() - start_ticks < 1000 / FPS);
     }
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 
     return action;
 }
@@ -194,91 +185,116 @@ Action GameMenu(Manager *manager) {
 void InitializeGame(Manager *manager) {
     srand(time(NULL));
 
-    LoadMap(&manager->map, "/home/ali/Desktop/3.txt");
-    // mapGenerator(&manager->map);
-    manager->tanks[0].x = PointMapToPixel(rand() % (maxMapX(&manager->map) - 1) + 0.5);
-    manager->tanks[0].y = PointMapToPixel(rand() % (maxMapY(&manager->map) - 1) + 0.5);
-    manager->tanks[0].enable = true;
-    manager->tanks[0].color = COLOR_RED;
-    manager->tanks[0].right_key = KEY_RIGHT;
-    manager->tanks[0].left_key = KEY_LEFT;
-    manager->tanks[0].forward_key = KEY_UP;
-    manager->tanks[0].backward_key = KEY_DOWN;
-    manager->tanks[0].fire_key = KEY_SLASH;
-    manager->tanks[0].angle = rand() % 31415 / 500.0;
+    char MapFiles[3][40];
+    const int MAP_COUNT = 3;
+    strcpy(MapFiles[0], "/home/ali/Desktop/1.txt");
+    strcpy(MapFiles[1], "/home/ali/Desktop/2.txt");
+    strcpy(MapFiles[2], "/home/ali/Desktop/3.txt");
+
     manager->tanks[0].score = 0;
-    for(int i = 0; i < BULLET_COUNT; i++)
-        manager->tanks[0].bullets[i].state = Disable;
-
-    manager->tanks[1].x = PointMapToPixel(rand() % (maxMapX(&manager->map) - 1) + 0.5);
-    manager->tanks[1].y = PointMapToPixel(rand() % (maxMapY(&manager->map) - 1) + 0.5);
-    manager->tanks[1].enable = true;
-    manager->tanks[1].color = COLOR_BLUE;
-    manager->tanks[1].right_key = KEY_D;
-    manager->tanks[1].left_key = KEY_A;
-    manager->tanks[1].forward_key = KEY_W;
-    manager->tanks[1].backward_key = KEY_S;
-    manager->tanks[1].fire_key = KEY_Q;
-    manager->tanks[1].angle = rand() % 31415 / 500.0;
     manager->tanks[1].score = 0;
-    for(int i = 0; i < BULLET_COUNT; i++)
-        manager->tanks[1].bullets[i].state = Disable;
-
-    manager->tanks[2].x = PointMapToPixel(rand() % (maxMapX(&manager->map) - 1) + 0.5);
-    manager->tanks[2].y = PointMapToPixel(rand() % (maxMapY(&manager->map) - 1) + 0.5);
-    manager->tanks[2].enable = true;
-    manager->tanks[2].color = COLOR_GREEN;
-    manager->tanks[2].right_key = KEY_K;
-    manager->tanks[2].left_key = KEY_H;
-    manager->tanks[2].forward_key = KEY_U;
-    manager->tanks[2].backward_key = KEY_J;
-    manager->tanks[2].fire_key = KEY_M;
-    manager->tanks[2].angle = rand() % 31415 / 500.0;
     manager->tanks[2].score = 0;
-    for(int i = 0; i < BULLET_COUNT; i++)
-        manager->tanks[2].bullets[i].state = Disable;
 
-    Smoke smoke[SMOKE_COUNT];
-    for(int i = 0; i < SMOKE_COUNT; i++) {
-        smoke[i].enable = false;
+    while(true) {
+        LoadMap(&manager->map, MapFiles[rand() % MAP_COUNT]);
+        int mapMaxX = maxMapX(&manager->map);
+        int mapMaxY = maxMapY(&manager->map);
+
+        SDL_SetWindowSize(
+                manager->window,
+                PointMapToPixel(mapMaxX) + MAP_MARGIN,
+                PointMapToPixel(mapMaxY) + MAP_MARGIN + UI_WIDTH
+        );
+
+        // mapGenerator(&manager->map);
+        manager->tanks[0].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
+        manager->tanks[0].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
+        manager->tanks[0].enable = true;
+        manager->tanks[0].color = COLOR_RED;
+        manager->tanks[0].right_key = KEY_RIGHT;
+        manager->tanks[0].left_key = KEY_LEFT;
+        manager->tanks[0].forward_key = KEY_UP;
+        manager->tanks[0].backward_key = KEY_DOWN;
+        manager->tanks[0].fire_key = KEY_SLASH;
+        manager->tanks[0].angle = rand() % 31415 / 500.0;
+        for (int i = 0; i < BULLET_COUNT; i++)
+            manager->tanks[0].bullets[i].state = Disable;
+
+        manager->tanks[1].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
+        manager->tanks[1].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
+        manager->tanks[1].enable = true;
+        manager->tanks[1].color = COLOR_BLUE;
+        manager->tanks[1].right_key = KEY_D;
+        manager->tanks[1].left_key = KEY_A;
+        manager->tanks[1].forward_key = KEY_W;
+        manager->tanks[1].backward_key = KEY_S;
+        manager->tanks[1].fire_key = KEY_Q;
+        manager->tanks[1].angle = rand() % 31415 / 500.0;
+        for (int i = 0; i < BULLET_COUNT; i++)
+            manager->tanks[1].bullets[i].state = Disable;
+
+        manager->tanks[2].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
+        manager->tanks[2].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
+        manager->tanks[2].enable = true;
+        manager->tanks[2].color = COLOR_GREEN;
+        manager->tanks[2].right_key = KEY_K;
+        manager->tanks[2].left_key = KEY_H;
+        manager->tanks[2].forward_key = KEY_U;
+        manager->tanks[2].backward_key = KEY_J;
+        manager->tanks[2].fire_key = KEY_M;
+        manager->tanks[2].angle = rand() % 31415 / 500.0;
+
+        for (int i = 0; i < BULLET_COUNT; i++)
+            manager->tanks[2].bullets[i].state = Disable;
+
+        Smoke smoke[SMOKE_COUNT];
+        for (int i = 0; i < SMOKE_COUNT; i++) {
+            smoke[i].enable = false;
+        }
+
+        const double FPS = 100;
+        Action action;
+
+        while (true) {
+            action = gameHandleEvent();
+            if (action == Exit)
+                break;
+
+            int start_ticks = SDL_GetTicks();
+
+            SDL_SetRenderDrawColor(manager->renderer, 230, 230, 230, 255);
+            SDL_RenderClear(manager->renderer);
+
+            PhysicsRenderer(manager->tanks, manager->tank_count, &manager->map, smoke, SMOKE_COUNT, manager);
+            SmokeRenderer(smoke, SMOKE_COUNT);
+
+            DrawMap(&manager->map, manager->renderer);
+            DrawTank(manager->tanks, manager->tank_count, manager->renderer);
+            DrawTanksBullets(manager->tanks, manager->tank_count, manager->renderer);
+            DrawSmoke(manager->renderer, smoke, SMOKE_COUNT);
+            UITankScore(manager->renderer, manager->tanks, manager->tank_count, mapMaxX, mapMaxY);
+
+            SDL_RenderPresent(manager->renderer);
+
+            int enable_tanks = 0;
+            for (int i = 0; i < manager->tank_count; i++)
+                enable_tanks += manager->tanks[i].enable == true ? 1 : 0;
+
+            if (enable_tanks < 2 && SDL_GetTicks() - manager->last_destroy_time > RELOAD_TIME * 1000) {
+                action = Reload;
+                break;
+            }
+
+            while (SDL_GetTicks() - start_ticks < 1000 / FPS);
+        }
+        if (action == Exit)
+            break;
+        for(int i = 0; i < manager->tank_count; i++)
+            if(manager->tanks[i].enable)
+                manager->tanks[i].score++;
     }
 
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window* window = SDL_CreateWindow(
-            "Alter Tank",
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            PointMapToPixel(maxMapX(&manager->map)) + MAP_MARGIN + 100,
-            PointMapToPixel(maxMapY(&manager->map)) + MAP_MARGIN,
-            SDL_WINDOW_OPENGL
-    );
-
-    // SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-    const double FPS = 100;
-
-    while (gameHandleEvent() != Exit) {
-        int start_ticks = SDL_GetTicks();
-
-        SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
-        SDL_RenderClear(renderer);
-
-        PhysicsRenderer(manager->tanks, manager->tank_count, &manager->map, smoke, SMOKE_COUNT);
-        SmokeRenderer(smoke, SMOKE_COUNT);
-
-        DrawMap(&manager->map, renderer);
-        DrawTank(manager->tanks, manager->tank_count, renderer);
-        DrawTanksBullets(manager->tanks, manager->tank_count, renderer);
-        DrawSmoke(renderer, smoke, SMOKE_COUNT);
-
-        SDL_RenderPresent(renderer);
-
-        while (SDL_GetTicks() - start_ticks < 1000 / FPS);
-    }
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(manager->renderer);
+    SDL_DestroyWindow(manager->window);
     SDL_Quit();
 }

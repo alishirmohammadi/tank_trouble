@@ -13,7 +13,6 @@
 #include "structs.h"
 #include "particle.h"
 
-
 int min(int a, int b) {
     return a > b ? b : a;
 }
@@ -52,7 +51,7 @@ void SmokeRenderer(Smoke smoke[], int count) {
     }
 }
 
-void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_count) {
+void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_count, Manager *manager) {
     for(int i = 0; i < count; i++) {
         if(getKeyState(tanks[i].right_key) && tanks[i].enable)
             TankRotateLeft(&tanks[i]);
@@ -181,7 +180,8 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                         continue;
                     if(magnitude(tanks[k].x - tanks[i].bullets[j].x, tanks[k].y - tanks[i].bullets[j].y) < TANK_RADIUS - BULLET_RADIUS) {
                         tanks[i].bullets[j].state = Disable;
-                        DestroyTank(&tanks[k]);
+                        tanks[k].enable = false;
+                        manager->last_destroy_time = SDL_GetTicks();
                         int disableSmokeId = 0;
                         while(disableSmokeId < smoke_count && smoke[disableSmokeId].enable == true)
                             disableSmokeId++;

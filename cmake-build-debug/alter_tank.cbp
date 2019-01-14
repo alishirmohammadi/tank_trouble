@@ -143,6 +143,12 @@
 		<Unit filename="/home/ali/Documents/fop/project/src/tank.h">
 			<Option target="alter_tank"/>
 		</Unit>
+		<Unit filename="/home/ali/Documents/fop/project/src/ui.c">
+			<Option target="alter_tank"/>
+		</Unit>
+		<Unit filename="/home/ali/Documents/fop/project/src/ui.h">
+			<Option target="alter_tank"/>
+		</Unit>
 		<Unit filename="/home/ali/Documents/fop/project/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
