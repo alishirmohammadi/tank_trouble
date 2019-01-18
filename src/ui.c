@@ -30,7 +30,5 @@ void UITankScore(SDL_Renderer *renderer, Tank tank[], int count, int mapMaxX, in
                 0,
                 255
         );
-        printf("%s", score_str);
     }
-    printf("\n");
 }

@@ -42,6 +42,7 @@ typedef struct {
     Bullet bullets[BULLET_COUNT];
     bool enable;
     int score;
+    int last_smoke_time;
     int forward_key, backward_key, right_key, left_key, fire_key;
 } Tank;
 

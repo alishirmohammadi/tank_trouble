@@ -217,6 +217,7 @@ void InitializeGame(Manager *manager) {
         manager->tanks[0].backward_key = KEY_DOWN;
         manager->tanks[0].fire_key = KEY_SLASH;
         manager->tanks[0].angle = rand() % 31415 / 500.0;
+        manager->tanks[0].last_smoke_time = 0;
         for (int i = 0; i < BULLET_COUNT; i++)
             manager->tanks[0].bullets[i].state = Disable;
 
@@ -230,6 +231,7 @@ void InitializeGame(Manager *manager) {
         manager->tanks[1].backward_key = KEY_S;
         manager->tanks[1].fire_key = KEY_Q;
         manager->tanks[1].angle = rand() % 31415 / 500.0;
+        manager->tanks[1].last_smoke_time = 0;
         for (int i = 0; i < BULLET_COUNT; i++)
             manager->tanks[1].bullets[i].state = Disable;
 
@@ -243,7 +245,7 @@ void InitializeGame(Manager *manager) {
         manager->tanks[2].backward_key = KEY_J;
         manager->tanks[2].fire_key = KEY_M;
         manager->tanks[2].angle = rand() % 31415 / 500.0;
-
+        manager->tanks[2].last_smoke_time = 0;
         for (int i = 0; i < BULLET_COUNT; i++)
             manager->tanks[2].bullets[i].state = Disable;
 

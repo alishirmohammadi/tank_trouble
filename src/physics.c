@@ -89,6 +89,25 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     }
                 }
             }
+            /*
+            double speed = magnitude(
+                    CanChangeX == true ? newX - x : 0,
+                    CanChangeY == true ? newY - y : 0
+                    );
+            if(speed < 0.5) {
+                if(SDL_GetTicks() - tanks[i].last_smoke_time > TANK_SMOKE_INIT_INTERVAL * 1000) {
+                    int disableSmokeId = 0;
+                    while (disableSmokeId < smoke_count && smoke[disableSmokeId].enable == true)
+                        disableSmokeId++;
+                    SmallSmoke(
+                            &smoke[disableSmokeId],
+                            x - cos(tanks[i].angle) * TANK_RADIUS,
+                            y - sin(tanks[i].angle) * TANK_RADIUS
+                    );
+                    tanks[i].last_smoke_time = SDL_GetTicks();
+                }
+            }
+            */
             if(CanChangeX)
                 TankForwardX(&tanks[i]);
             if(CanChangeY)
@@ -169,8 +188,9 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     }
                 }
                 MoveBullet(&tanks[i].bullets[j]);
-                if(SDL_GetTicks() - tanks[i].bullets[j].instantiate_time > BULLET_LIFETIME * 1000)
+                if(SDL_GetTicks() - tanks[i].bullets[j].instantiate_time > BULLET_LIFETIME * 1000) {
                     tanks[i].bullets[j].state = FadeOut;
+                }
                 if(SDL_GetTicks() - tanks[i].bullets[j].instantiate_time > (BULLET_LIFETIME + BULLET_FADE_TIME) * 1000)
                     tanks[i].bullets[j].state = Disable;
             }
