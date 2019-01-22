@@ -63,7 +63,9 @@ typedef enum {
     Help,
     Reload,
     Exit,
-    None
+    None,
+    Load,
+    Save
 } Action;
 
 typedef struct {

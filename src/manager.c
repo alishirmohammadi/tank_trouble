@@ -76,7 +76,7 @@ void DrawButton(SDL_Renderer *renderer, Button buttons[]) {
         int center_place = strlen(buttons[i].text);
         stringRGBA(
                 renderer,
-                SCREEN_WIDTH / 2 - center_place * 4,
+                (SCREEN_WIDTH / 2) - center_place * 4,
                 BUTTON_TOP + BUTTON_DISTANCE * i,
                 buttons[i].text,
                 buttons[i].text_color.red,
