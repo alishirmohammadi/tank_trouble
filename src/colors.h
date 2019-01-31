@@ -15,6 +15,8 @@
 #define COLOR_GREEN new_Color(0,160,0,255)
 #define COLOR_GRAY new_Color(240,240,240,255)
 #define COLOR_YELLOW new_Color(255,255,0,255)
+#define COLOR_ORANGE new_Color(255,140,0,255)
+#define COLOR_BROWN new_Color(139,69,19,255)
 
 #include "structs.h"
 

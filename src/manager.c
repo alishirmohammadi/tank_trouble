@@ -35,9 +35,24 @@ void InitializeGame(Manager *manager) {
     strcpy(MapFiles[7], "../maps/8.txt");
     strcpy(MapFiles[8], "../maps/9.txt");
 
+    Color TankColors[6];
+    TankColors[0] = COLOR_RED;
+    TankColors[1] = COLOR_BLUE;
+    TankColors[2] = COLOR_GREEN;
+    TankColors[3] = COLOR_YELLOW;
+    TankColors[4] = COLOR_ORANGE;
+    TankColors[5] = COLOR_BROWN;
+
+    FILE *f = fopen("../alter_tank.conf", "r");
+    int max_score, tank1Color, tank2Color, tank3Color;
+    fscanf(f, "%d%d%d%d", &max_score, &tank1Color, &tank2Color, &tank3Color);
+
     manager->tanks[0].score = 0;
     manager->tanks[1].score = 0;
     manager->tanks[2].score = 0;
+    manager->tanks[0].color = TankColors[tank1Color];
+    manager->tanks[1].color = TankColors[tank2Color];
+    manager->tanks[2].color = TankColors[tank3Color];
 
     while(true) {
         LoadMap(&manager->map, MapFiles[rand() % MAP_COUNT]);
@@ -54,7 +69,6 @@ void InitializeGame(Manager *manager) {
         manager->tanks[0].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[0].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
         manager->tanks[0].enable = true;
-        manager->tanks[0].color = COLOR_RED;
         manager->tanks[0].right_key = KEY_RIGHT;
         manager->tanks[0].left_key = KEY_LEFT;
         manager->tanks[0].forward_key = KEY_UP;
@@ -68,7 +82,6 @@ void InitializeGame(Manager *manager) {
         manager->tanks[1].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[1].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
         manager->tanks[1].enable = true;
-        manager->tanks[1].color = COLOR_BLUE;
         manager->tanks[1].right_key = KEY_D;
         manager->tanks[1].left_key = KEY_A;
         manager->tanks[1].forward_key = KEY_W;
@@ -82,7 +95,6 @@ void InitializeGame(Manager *manager) {
         manager->tanks[2].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[2].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
         manager->tanks[2].enable = true;
-        manager->tanks[2].color = COLOR_GREEN;
         manager->tanks[2].right_key = KEY_K;
         manager->tanks[2].left_key = KEY_H;
         manager->tanks[2].forward_key = KEY_U;
