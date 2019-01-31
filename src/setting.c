@@ -3,6 +3,7 @@
 
 Color ButtonColor, ButtonHover, ButtonPress;
 ButtonState winDec, winInc, Tank1Left, Tank2Left, Tank3Left, Tank1Right, Tank2Right, Tank3Right;
+int WinScore;
 
 void DrawSetting(SDL_Renderer *renderer) {
     Color WinDecColor = (winDec == Idle ? ButtonColor : (winDec == Hover ? ButtonHover : ButtonPress));
@@ -53,6 +54,28 @@ Action settingHandle() {
             }
         }
         if(event.type == SDL_MOUSEBUTTONUP) {
+            int x, y;
+            SDL_GetMouseState(&x, &y);
+            if(x >= BUTTON_RIGHTMARGIN && x <= BUTTON_RIGHTMARGIN + 60) {
+                if(y >= 30 && y <= 90)
+                    if(winDec == Pressed) winDec = Hover;
+                if(y >= 100 && y <= 160)
+                    if(Tank1Left == Pressed) Tank1Left = Hover;
+                if(y >= 170 && y <= 230)
+                    if(Tank2Left == Pressed) Tank2Left = Hover;
+                if(y >= 240 && y <= 300)
+                    if(Tank3Left == Pressed) Tank3Left = Hover;
+            }
+            if(x <= SCREEN_WIDTH - BUTTON_RIGHTMARGIN && x >= SCREEN_WIDTH - BUTTON_RIGHTMARGIN - 60) {
+                if(y >= 30 && y <= 90)
+                    if(winInc != Pressed) winInc = Hover;
+                if(y >= 100 && y <= 160)
+                    if(Tank1Right == Pressed) Tank1Right = Hover;
+                if(y >= 170 && y <= 230)
+                    if(Tank2Right == Pressed) Tank2Right = Hover;
+                if(y >= 240 && y <= 300)
+                    if(Tank3Right == Pressed) Tank3Right = Hover;
+            }
             winDec = Idle;
             winInc = Idle;
             Tank1Left = Idle;
@@ -67,6 +90,8 @@ Action settingHandle() {
 }
 
 void LoadSetting(Manager *manager) {
+    WinScore = 0;
+
     winDec = Idle;
     winInc = Idle;
     Tank1Left = Idle;
