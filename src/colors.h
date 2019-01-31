@@ -12,7 +12,7 @@
 #define COLOR_BUTTON_HOVER new_Color(170,170,170,255)
 #define COLOR_BUTTON_PRESSED new_Color(150,150,150,255)
 #define COLOR_WHITE new_Color(255,255,255,255)
-#define COLOR_GREEN new_Color(0,255,0,255)
+#define COLOR_GREEN new_Color(0,160,0,255)
 #define COLOR_GRAY new_Color(240,240,240,255)
 #define COLOR_YELLOW new_Color(255,255,0,255)
 

@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "manager.h"
+#include "main_manu.h"
 
 Manager manager;
 
@@ -9,8 +10,8 @@ int main() {
             "Alter Tank",
             100,
             30,
-            100,
-            100,
+            0,
+            0,
             SDL_WINDOW_OPENGL
     );
     manager.renderer = SDL_CreateRenderer(manager.window, -1, SDL_RENDERER_ACCELERATED);

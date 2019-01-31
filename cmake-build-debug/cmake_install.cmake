@@ -1,4 +1,4 @@
-# Install script for directory: /home/ali/Documents/fop/project
+# Install script for directory: /home/ali/alter_tank
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ali/Documents/fop/project/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ali/alter_tank/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -59,8 +59,7 @@ typedef enum {
 typedef enum {
     Play2v2,
     Play3v3,
-    About,
-    Help,
+    Setting,
     Reload,
     Exit,
     None,
@@ -83,6 +82,7 @@ typedef struct {
     int last_destroy_time;
     SDL_Window *window;
     SDL_Renderer *renderer;
+    int WinScore;
 
 } Manager;
 

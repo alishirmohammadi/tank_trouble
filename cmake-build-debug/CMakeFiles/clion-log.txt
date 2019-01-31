@@ -1,4 +1,4 @@
-/opt/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ali/Documents/fop/project
+/snap/clion/58/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ali/alter_tank
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/ali/Documents/fop/project/cmake-build-debug
+-- Build files have been written to: /home/ali/alter_tank/cmake-build-debug

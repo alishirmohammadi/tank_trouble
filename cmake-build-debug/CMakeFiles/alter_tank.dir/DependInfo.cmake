@@ -4,18 +4,20 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/ali/Documents/fop/project/src/bullet.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/bullet.c.o"
-  "/home/ali/Documents/fop/project/src/colors.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/colors.c.o"
-  "/home/ali/Documents/fop/project/src/graphics.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/graphics.c.o"
-  "/home/ali/Documents/fop/project/src/keyboard_handler.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
-  "/home/ali/Documents/fop/project/src/main.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/main.c.o"
-  "/home/ali/Documents/fop/project/src/manager.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/manager.c.o"
-  "/home/ali/Documents/fop/project/src/map.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/map.c.o"
-  "/home/ali/Documents/fop/project/src/particle.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/particle.c.o"
-  "/home/ali/Documents/fop/project/src/physics.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/physics.c.o"
-  "/home/ali/Documents/fop/project/src/structs.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/structs.c.o"
-  "/home/ali/Documents/fop/project/src/tank.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/tank.c.o"
-  "/home/ali/Documents/fop/project/src/ui.c" "/home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/alter_tank.dir/src/ui.c.o"
+  "/home/ali/alter_tank/src/bullet.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/bullet.c.o"
+  "/home/ali/alter_tank/src/colors.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/colors.c.o"
+  "/home/ali/alter_tank/src/graphics.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/graphics.c.o"
+  "/home/ali/alter_tank/src/keyboard_handler.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
+  "/home/ali/alter_tank/src/main.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/main.c.o"
+  "/home/ali/alter_tank/src/main_manu.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/main_manu.c.o"
+  "/home/ali/alter_tank/src/manager.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/manager.c.o"
+  "/home/ali/alter_tank/src/map.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/map.c.o"
+  "/home/ali/alter_tank/src/particle.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/particle.c.o"
+  "/home/ali/alter_tank/src/physics.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/physics.c.o"
+  "/home/ali/alter_tank/src/setting.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/setting.c.o"
+  "/home/ali/alter_tank/src/structs.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/structs.c.o"
+  "/home/ali/alter_tank/src/tank.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/tank.c.o"
+  "/home/ali/alter_tank/src/ui.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/ui.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/58/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /opt/clion/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/58/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ali/Documents/fop/project
+CMAKE_SOURCE_DIR = /home/ali/alter_tank
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ali/Documents/fop/project/cmake-build-debug
+CMAKE_BINARY_DIR = /home/ali/alter_tank/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/ali/Documents/fop/project/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/clion/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/58/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/opt/clion/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/58/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles /home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ali/alter_tank/cmake-build-debug/CMakeFiles /home/ali/alter_tank/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ali/Documents/fop/project/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ali/alter_tank/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -258,6 +258,33 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/main_manu.o: src/main_manu.c.o
+
+.PHONY : src/main_manu.o
+
+# target to build an object file
+src/main_manu.c.o:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/main_manu.c.o
+.PHONY : src/main_manu.c.o
+
+src/main_manu.i: src/main_manu.c.i
+
+.PHONY : src/main_manu.i
+
+# target to preprocess a source file
+src/main_manu.c.i:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/main_manu.c.i
+.PHONY : src/main_manu.c.i
+
+src/main_manu.s: src/main_manu.c.s
+
+.PHONY : src/main_manu.s
+
+# target to generate assembly for a file
+src/main_manu.c.s:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/main_manu.c.s
+.PHONY : src/main_manu.c.s
+
 src/manager.o: src/manager.c.o
 
 .PHONY : src/manager.o
@@ -366,6 +393,33 @@ src/physics.c.s:
 	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/physics.c.s
 .PHONY : src/physics.c.s
 
+src/setting.o: src/setting.c.o
+
+.PHONY : src/setting.o
+
+# target to build an object file
+src/setting.c.o:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/setting.c.o
+.PHONY : src/setting.c.o
+
+src/setting.i: src/setting.c.i
+
+.PHONY : src/setting.i
+
+# target to preprocess a source file
+src/setting.c.i:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/setting.c.i
+.PHONY : src/setting.c.i
+
+src/setting.s: src/setting.c.s
+
+.PHONY : src/setting.s
+
+# target to generate assembly for a file
+src/setting.c.s:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/setting.c.s
+.PHONY : src/setting.c.s
+
 src/structs.o: src/structs.c.o
 
 .PHONY : src/structs.o
@@ -471,6 +525,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/main_manu.o"
+	@echo "... src/main_manu.i"
+	@echo "... src/main_manu.s"
 	@echo "... src/manager.o"
 	@echo "... src/manager.i"
 	@echo "... src/manager.s"
@@ -483,6 +540,9 @@ help:
 	@echo "... src/physics.o"
 	@echo "... src/physics.i"
 	@echo "... src/physics.s"
+	@echo "... src/setting.o"
+	@echo "... src/setting.i"
+	@echo "... src/setting.s"
 	@echo "... src/structs.o"
 	@echo "... src/structs.i"
 	@echo "... src/structs.s"
