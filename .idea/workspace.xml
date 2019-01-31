@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ef6da25-9ed5-43d0-93d3-ed9de6abb0af" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/alter_tank" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/setting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/setting.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -44,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/setting.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+            <state relative-caret-position="266">
+              <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -286,16 +287,15 @@
       <workItem from="1548071850633" duration="3105000" />
       <workItem from="1548089026769" duration="636000" />
       <workItem from="1548130333007" duration="1213000" />
-      <workItem from="1548957647974" duration="6608000" />
+      <workItem from="1548957647974" duration="7787000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164320000" />
+    <option name="totallyTimeSpent" value="165499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="684" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49577466" visible="true" weight="0.23111783" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -309,7 +309,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32733813" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32014388" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32014388" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32962963" />
       <window_info anchor="bottom" id="CMake" order="12" />
@@ -582,8 +582,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/setting.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+        <state relative-caret-position="266">
+          <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

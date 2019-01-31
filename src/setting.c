@@ -5,6 +5,10 @@ Color ButtonColor, ButtonHover, ButtonPress;
 ButtonState winDec, winInc, Tank1Left, Tank2Left, Tank3Left, Tank1Right, Tank2Right, Tank3Right;
 int WinScore;
 
+int maximum(int a, int b) {
+    return (a > b ? a : b);
+}
+
 void DrawSetting(SDL_Renderer *renderer) {
     Color WinDecColor = (winDec == Idle ? ButtonColor : (winDec == Hover ? ButtonHover : ButtonPress));
     Color WinIncColor = (winInc == Idle ? ButtonColor : (winInc == Hover ? ButtonHover : ButtonPress));
@@ -22,6 +26,9 @@ void DrawSetting(SDL_Renderer *renderer) {
     thickLineRGBA(renderer, SCREEN_WIDTH - BUTTON_RIGHTMARGIN, 200, SCREEN_WIDTH - BUTTON_RIGHTMARGIN - 60, 200, 60, Tank2RightColor.red, Tank2RightColor.green, Tank2RightColor.blue, 255);
     thickLineRGBA(renderer, BUTTON_RIGHTMARGIN, 270, BUTTON_RIGHTMARGIN + 60, 270, 60, Tank3LeftColor.red, Tank3LeftColor.green, Tank3LeftColor.blue, 255);
     thickLineRGBA(renderer, SCREEN_WIDTH - BUTTON_RIGHTMARGIN, 270, SCREEN_WIDTH - BUTTON_RIGHTMARGIN - 60, 270, 60, Tank3RightColor.red, Tank3RightColor.green, Tank3RightColor.blue, 255);
+    char ScoreString[4];
+    sprintf(ScoreString, "%d", WinScore);
+    stringRGBA(renderer, SCREEN_WIDTH / 2 - 4 * strlen(ScoreString), 60, ScoreString, 0, 0, 0, 255);
 }
 
 Action settingHandle() {
@@ -58,7 +65,7 @@ Action settingHandle() {
             SDL_GetMouseState(&x, &y);
             if(x >= BUTTON_RIGHTMARGIN && x <= BUTTON_RIGHTMARGIN + 60) {
                 if(y >= 30 && y <= 90)
-                    if(winDec == Pressed) winDec = Hover;
+                    if(winDec == Pressed) WinScore = maximum(WinScore - 1, 5);
                 if(y >= 100 && y <= 160)
                     if(Tank1Left == Pressed) Tank1Left = Hover;
                 if(y >= 170 && y <= 230)
@@ -68,7 +75,7 @@ Action settingHandle() {
             }
             if(x <= SCREEN_WIDTH - BUTTON_RIGHTMARGIN && x >= SCREEN_WIDTH - BUTTON_RIGHTMARGIN - 60) {
                 if(y >= 30 && y <= 90)
-                    if(winInc != Pressed) winInc = Hover;
+                    if(winInc == Pressed) WinScore++;
                 if(y >= 100 && y <= 160)
                     if(Tank1Right == Pressed) Tank1Right = Hover;
                 if(y >= 170 && y <= 230)
@@ -90,7 +97,7 @@ Action settingHandle() {
 }
 
 void LoadSetting(Manager *manager) {
-    WinScore = 0;
+    WinScore = 10;
 
     winDec = Idle;
     winInc = Idle;
