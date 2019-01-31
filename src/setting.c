@@ -34,6 +34,7 @@ void DrawSetting(SDL_Renderer *renderer) {
     thickLineRGBA(renderer, BUTTON_RIGHTMARGIN, 270, BUTTON_RIGHTMARGIN + 60, 270, 60, Tank3LeftColor.red, Tank3LeftColor.green, Tank3LeftColor.blue, 255);
     thickLineRGBA(renderer, SCREEN_WIDTH - BUTTON_RIGHTMARGIN, 270, SCREEN_WIDTH - BUTTON_RIGHTMARGIN - 60, 270, 60, Tank3RightColor.red, Tank3RightColor.green, Tank3RightColor.blue, 255);
     thickLineRGBA(renderer, BUTTON_RIGHTMARGIN, 340, SCREEN_WIDTH - BUTTON_RIGHTMARGIN, 340, 50, SaveBtnColor.red, SaveBtnColor.green, SaveBtnColor.blue, 255);
+    thickLineRGBA(renderer, BUTTON_RIGHTMARGIN, 365, SCREEN_WIDTH - BUTTON_RIGHTMARGIN, 365, 3, 0, 0, 0, 255);
 
     char ScoreString[4];
     sprintf(ScoreString, "%d", WinScore);

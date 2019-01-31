@@ -38,6 +38,7 @@ typedef struct {
 typedef struct {
     double x, y;
     Color color;
+    int colorIndex;
     double angle;
     Bullet bullets[BULLET_COUNT];
     bool enable;

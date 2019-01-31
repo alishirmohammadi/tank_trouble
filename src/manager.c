@@ -9,6 +9,10 @@
 #include "ui.h"
 #include <time.h>
 #define RELOAD_TIME 3
+#define TANK_COLOR_COUNT 6
+
+SDL_Surface *Surfaces[TANK_COLOR_COUNT];
+SDL_Texture *Textures[TANK_COLOR_COUNT];
 
 Action gameHandleEvent() {
     SDL_Event event;
@@ -43,6 +47,21 @@ void InitializeGame(Manager *manager) {
     TankColors[4] = COLOR_ORANGE;
     TankColors[5] = COLOR_BROWN;
 
+    Surfaces[0] = SDL_LoadBMP("../images/tank_red.bmp");
+    Surfaces[1] = SDL_LoadBMP("../images/tank_blue.bmp");
+    Surfaces[2] = SDL_LoadBMP("../images/tank_green.bmp");
+    Surfaces[3] = SDL_LoadBMP("../images/tank_yellow.bmp");
+    Surfaces[4] = SDL_LoadBMP("../images/tank_orange.bmp");
+    Surfaces[5] = SDL_LoadBMP("../images/tank_brown.bmp");
+
+    Textures[0] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[0]);
+    Textures[1] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[1]);
+    Textures[2] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[2]);
+    Textures[3] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[3]);
+    Textures[4] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[4]);
+    Textures[5] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[5]);
+
+
     FILE *f = fopen("../alter_tank.conf", "r");
     int max_score, tank1Color, tank2Color, tank3Color;
     fscanf(f, "%d%d%d%d", &max_score, &tank1Color, &tank2Color, &tank3Color);
@@ -53,6 +72,9 @@ void InitializeGame(Manager *manager) {
     manager->tanks[0].color = TankColors[tank1Color];
     manager->tanks[1].color = TankColors[tank2Color];
     manager->tanks[2].color = TankColors[tank3Color];
+    manager->tanks[0].colorIndex = tank1Color;
+    manager->tanks[1].colorIndex = tank2Color;
+    manager->tanks[2].colorIndex = tank3Color;
 
     while(true) {
         LoadMap(&manager->map, MapFiles[rand() % MAP_COUNT]);
@@ -130,7 +152,7 @@ void InitializeGame(Manager *manager) {
             DrawTank(manager->tanks, manager->tank_count, manager->renderer);
             DrawTanksBullets(manager->tanks, manager->tank_count, manager->renderer);
             DrawSmoke(manager->renderer, smoke, SMOKE_COUNT);
-            UITankScore(manager->renderer, manager->tanks, manager->tank_count, mapMaxX, mapMaxY);
+            UITankScore(manager->renderer, manager->tanks, manager->tank_count, mapMaxX, mapMaxY, Textures);
 
             SDL_RenderPresent(manager->renderer);
 

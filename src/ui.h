@@ -7,10 +7,10 @@
 
 #define UI_MARGIN 5
 #define TEXT_HEIGHT 10
-#define UI_WIDTH (UI_MARGIN*2+TANK_RADIUS*2+TEXT_HEIGHT)
+#define UI_WIDTH (UI_MARGIN*2+34+TEXT_HEIGHT)
 #include <SDL_render.h>
 #include "structs.h"
 
-void UITankScore(SDL_Renderer *renderer, Tank *tank, int count, int MapMaxX, int MapMaxY);
+void UITankScore(SDL_Renderer *renderer, Tank tank[], int count, int mapMaxX, int mapMaxY, SDL_Texture *Textures[]);
 
 #endif //ALTER_TANK_UI_H
