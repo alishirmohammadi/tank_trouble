@@ -98,7 +98,7 @@ Action settingHandle() {
             SDL_GetMouseState(&x, &y);
             if(x >= BUTTON_RIGHTMARGIN && x <= BUTTON_RIGHTMARGIN + 60) {
                 if(y >= 30 && y <= 90)
-                    if(winDec == Pressed) WinScore = maximum(WinScore - 1, 5);
+                    if(winDec == Pressed) WinScore = maximum(WinScore - 5, 5);
                 if(y >= 100 && y <= 160)
                     if(Tank1Left == Pressed) Tank1ColorIndex = (Tank1ColorIndex + TANK_COLOR_COUNT - 1) % TANK_COLOR_COUNT;
                 if(y >= 170 && y <= 230)
@@ -108,7 +108,7 @@ Action settingHandle() {
             }
             if(x <= SCREEN_WIDTH - BUTTON_RIGHTMARGIN && x >= SCREEN_WIDTH - BUTTON_RIGHTMARGIN - 60) {
                 if(y >= 30 && y <= 90)
-                    if(winInc == Pressed) WinScore++;
+                    if(winInc == Pressed) WinScore+=5;
                 if(y >= 100 && y <= 160)
                     if(Tank1Right == Pressed) Tank1ColorIndex = (Tank1ColorIndex + 1) % TANK_COLOR_COUNT;
                 if(y >= 170 && y <= 230)

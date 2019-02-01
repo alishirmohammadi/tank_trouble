@@ -17,12 +17,138 @@
 SDL_Surface *Surfaces[TANK_COLOR_COUNT], *items_surfaces[ITEM_TYPE_COUNT];
 SDL_Texture *Textures[TANK_COLOR_COUNT], *items_textures[ITEM_TYPE_COUNT];
 
+void SaveGame(Manager *manager) {
+    FILE *f = fopen("../game.dat", "w");
+    fprintf(f, "%d\n", manager->tank_count);
+    for(int i = 0; i < manager->tank_count; i++) {
+        fprintf(f, "%f %f %f %d\n", manager->tanks[i].x, manager->tanks[i].y, manager->tanks[i].angle, manager->tanks[i].score);
+    }
+    fprintf(f, "%d", manager->mapIndex);
+    fclose(f);
+}
+
 Action gameHandleEvent() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT)
+        if (event.type == SDL_QUIT) {
             return Exit;
+        }
         handleKeyboard(event);
+        if (event.key.keysym.sym == SDLK_ESCAPE)
+            return Pause;
+    }
+}
+
+int ScreenWidth;
+ButtonState btnState[3];
+
+Action PauseMenuHandleEvent() {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            return Exit;
+        }
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        if (event.type == SDL_MOUSEBUTTONDOWN) {
+            for(int i = 0; i < 4; i++) {
+                if(x >= ScreenWidth / 2 - 100 && x <= ScreenWidth / 2 + 100)
+                    if(y >= BUTTON_TOP + i * BUTTON_DISTANCE - BUTTON_WIDTH && y <= BUTTON_TOP + i * BUTTON_DISTANCE + BUTTON_WIDTH)
+                        btnState[i] = Pressed;
+            }
+        }
+        if (event.type == SDL_MOUSEBUTTONUP) {
+            for(int i = 0; i < 4; i++) {
+                if(btnState[i] == Pressed) {
+                    btnState[i] = Idle;
+                    if(x >= ScreenWidth / 2 - 100 && x <= ScreenWidth / 2 + 100)
+                        if(y >= BUTTON_TOP + i * BUTTON_DISTANCE - BUTTON_WIDTH && y <= BUTTON_TOP + i * BUTTON_DISTANCE + BUTTON_WIDTH) {
+                            if (i == 0) return Resume;
+                            if (i == 1) return Save;
+                            if (i == 2) return ShowMenu;
+                        }
+                }
+            }
+        }
+    }
+}
+
+
+void PauseMenu(Manager *manager) {
+    const double FPS = 100;
+    Action action;
+    int mapMaxX = maxMapX(&manager->map);
+    ScreenWidth = PointMapToPixel(mapMaxX) + MAP_MARGIN;
+    for(int i = 0; i < 3; i++)
+        btnState[i] = Idle;
+
+    char Text[3][10];
+    strcpy(Text[0], "Resume");
+    strcpy(Text[1], "Save");
+    strcpy(Text[2], "Main Menu");
+
+    while (true) {
+        action = PauseMenuHandleEvent();
+        if(action == Exit || action == Resume)
+            break;
+        if(action == Save) {
+            SaveGame(manager);
+            break;
+        }
+        SDL_SetRenderDrawColor(manager->renderer, 230, 230, 230, 255);
+        SDL_RenderClear(manager->renderer);
+        for(int i = 0; i < 3; i++)
+            if(btnState[i] != Pressed)
+                btnState[i] = Idle;
+
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        for(int i = 0; i < 3; i++) {
+            if(x >= ScreenWidth / 2 - 100 && x <= ScreenWidth / 2 + 100)
+                if(y >= BUTTON_TOP + i * BUTTON_DISTANCE - BUTTON_WIDTH && y <= BUTTON_TOP + i * BUTTON_DISTANCE + BUTTON_WIDTH)
+                    if(btnState[i] != Pressed) btnState[i] = Hover;
+        }
+
+        for(int i = 0; i < 3; i++) {
+            Color c = btnState[i] == Idle ? COLOR_BUTTON : (btnState[i] == Hover ? COLOR_BUTTON_HOVER
+                                                                                 : COLOR_BUTTON_PRESSED);
+            thickLineRGBA(
+                    manager->renderer,
+                    ScreenWidth / 2 - 100,
+                    BUTTON_TOP + i * BUTTON_DISTANCE,
+                    ScreenWidth / 2 + 100,
+                    BUTTON_TOP + i * BUTTON_DISTANCE,
+                    BUTTON_WIDTH * 2,
+                    c.red,
+                    c.green,
+                    c.blue,
+                    c.alpha
+            );
+            thickLineRGBA(
+                    manager->renderer,
+                    ScreenWidth / 2 - 100,
+                    BUTTON_TOP + i * BUTTON_DISTANCE + BUTTON_WIDTH,
+                    ScreenWidth / 2 + 100,
+                    BUTTON_TOP + i * BUTTON_DISTANCE + BUTTON_WIDTH,
+                    3,
+                    0, 0, 0, 255
+            );
+            float scale = 1.5;
+            SDL_RenderSetScale(manager->renderer, scale, scale);
+            stringRGBA(
+                    manager->renderer,
+                    (ScreenWidth / 2 - strlen(Text[i]) * 6) / scale,
+                    (BUTTON_TOP + i * BUTTON_DISTANCE) / scale,
+                    Text[i],
+                    0, 0, 0, 255
+            );
+            SDL_RenderSetScale(manager->renderer, 1, 1);
+        }
+
+        SDL_RenderPresent(manager->renderer);
+
+        int start_ticks = SDL_GetTicks();
+        while (SDL_GetTicks() - start_ticks < 1000 / FPS);
     }
 }
 
@@ -31,7 +157,7 @@ void InitializeGame(Manager *manager) {
     srand(time(NULL));
 
     char MapFiles[9][40];
-    const int MAP_COUNT = 1;
+    const int MAP_COUNT = 9;
     strcpy(MapFiles[0], "../maps/1.txt");
     strcpy(MapFiles[1], "../maps/2.txt");
     strcpy(MapFiles[2], "../maps/3.txt");
@@ -88,9 +214,9 @@ void InitializeGame(Manager *manager) {
     manager->tanks[2].colorIndex = tank3Color;
 
 
-    printf("%d\n", manager->tank_count);
     while(true) {
-        LoadMap(&manager->map, MapFiles[rand() % MAP_COUNT]);
+        manager->mapIndex = rand() % MAP_COUNT;
+        LoadMap(&manager->map, MapFiles[manager->mapIndex]);
         int mapMaxX = maxMapX(&manager->map);
         int mapMaxY = maxMapY(&manager->map);
 
@@ -121,8 +247,10 @@ void InitializeGame(Manager *manager) {
         manager->tanks[0].hasMachineGun = false;
         manager->tanks[0].hasMine = false;
         manager->tanks[0].hasLaser = false;
-        for (int i = 0; i < BULLET_COUNT; i++)
+        for (int i = 0; i < BULLET_COUNT; i++) {
             manager->tanks[0].bullets[i].state = Disable;
+            manager->tanks[0].bullets[i].isBomb = false;
+        }
 
         manager->tanks[1].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[1].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
@@ -138,8 +266,10 @@ void InitializeGame(Manager *manager) {
         manager->tanks[1].hasMachineGun = false;
         manager->tanks[1].hasMine = false;
         manager->tanks[1].hasLaser = false;
-        for (int i = 0; i < BULLET_COUNT; i++)
+        for (int i = 0; i < BULLET_COUNT; i++) {
             manager->tanks[1].bullets[i].state = Disable;
+            manager->tanks[1].bullets[i].isBomb = false;
+        }
 
         manager->tanks[2].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[2].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
@@ -155,16 +285,21 @@ void InitializeGame(Manager *manager) {
         manager->tanks[2].hasMachineGun = false;
         manager->tanks[2].hasMine = false;
         manager->tanks[2].hasLaser = false;
-        for (int i = 0; i < BULLET_COUNT; i++)
+        for (int i = 0; i < BULLET_COUNT; i++) {
             manager->tanks[2].bullets[i].state = Disable;
+            manager->tanks[2].bullets[i].isBomb = false;
+        }
 
         Smoke smoke[SMOKE_COUNT];
         for (int i = 0; i < SMOKE_COUNT; i++) {
             smoke[i].enable = false;
         }
 
-        for (int i = 0; i < MAX_ITEM_COUNT; i++)
+        for (int i = 0; i < MAX_ITEM_COUNT; i++) {
             manager->item[i].enable = false;
+            manager->item[i].x = -100;
+            manager->item[i].y = -100;
+        }
 
 
         const double FPS = 100;
@@ -172,8 +307,10 @@ void InitializeGame(Manager *manager) {
 
         while (true) {
             action = gameHandleEvent();
-            if (action == Exit)
+            if(action == Exit)
                 break;
+            if(action == Pause)
+                PauseMenu(manager);
 
             int start_ticks = SDL_GetTicks();
 

@@ -70,7 +70,10 @@ typedef enum {
     Exit,
     None,
     Load,
-    Save
+    Save,
+    Resume,
+    Pause,
+    ShowMenu
 } Action;
 
 typedef struct {
@@ -92,6 +95,7 @@ typedef struct {
 
 typedef struct {
     Map map;
+    int mapIndex;
     int tank_count;
     Tank tanks[5];
     Button button[5];

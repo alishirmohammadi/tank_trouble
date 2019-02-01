@@ -20,23 +20,26 @@ bool CreateItem(Item items[], Map *map, int *x, int *y, Manager *manager) {
     }
     int mapMaxX = maxMapX(map);
     int mapMaxY = maxMapY(map);
-    items[i].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
-    items[i].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
-    items[i].type = rand() % 4;
+    int ItemX = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
+    int ItemY = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
+    int ItemType = rand() % 4;
     for(int j = 0; j < MAX_ITEM_COUNT; j++) {
         if(items[j].enable == true && items[j].x == items[i].x && items[j].y == items[i].y) {
             items[i].enable = false;
+            items[i].x = -100;
+            items[i].y = -100;
             return false;
         }
-        if(items[j].enable == true && items[j].type == items[i].type) {
+        if(items[j].enable == true && items[j].type == ItemType) {
             items[i].enable = false;
+            items[i].x = -100;
+            items[i].y = -100;
             return false;
         }
     }
     double minDistance = 10000;
     for(int j = 0; j < manager->tank_count; j++) {
-        minDistance = minimum(minDistance, local_magnitude(items[i].x - manager->tanks[j].x, items[i].y - manager->tanks[j].y));
-        printf("%d\t", j);
+        minDistance = minimum(minDistance, local_magnitude(ItemX - manager->tanks[j].x, ItemY - manager->tanks[j].y));
     }
     printf("%f\n", minDistance);
     if(minDistance < 59) {
@@ -46,8 +49,11 @@ bool CreateItem(Item items[], Map *map, int *x, int *y, Manager *manager) {
         return false;
     } else {
         items[i].enable = true;
-        *x = items[i].x;
-        *y = items[i].y;
+        items[i].x = ItemX;
+        items[i].y = ItemY;
+        items[i].type = ItemType;
+        *x = ItemX;
+        *y = ItemY;
         return true;
     }
 }

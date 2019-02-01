@@ -103,7 +103,7 @@ void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
                     tank[i].y + TANK_GUN_LENGTH * 1.2 * sin(tank[i].angle),
                     tank[i].x + 2000 * cos(tank[i].angle),
                     tank[i].y + 2000 * sin(tank[i].angle),
-                    2, 255, 0, 0, abs(SDL_GetTicks() / 5 % 300 - 150));
+                    4, 255, 0, 0, abs(SDL_GetTicks() / 3 % 200 - 100));
         } else if(tank[i].hasMachineGun == true) {
             thickLineRGBA(
                     renderer,
