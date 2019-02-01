@@ -155,6 +155,7 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                         break;
                     case MachineGun:
                         tanks[i].hasMachineGun = true;
+                        tanks[i].hasShoot = false;
                         break;
                     case Laser:
                         tanks[i].hasLaser = true;
@@ -272,6 +273,7 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     }
                 }
             } else if (tanks[i].hasMachineGun) {
+                tanks[i].hasShoot = true;
                 int j = 0;
                 while(small_bullet[1][j].state == Enable) j++;
                 if(j == 20)
@@ -282,7 +284,7 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     small_bullet[1][j].y = tanks[i].y + sin(tanks[i].angle) * (TANK_RADIUS - 2);
                     small_bullet[1][j].vx = cos(angle) * 1.4;
                     small_bullet[1][j].vy = sin(angle) * 1.4;
-                    small_bullet[1][j].instantiate_time = SDL_GetTicks() + 10000;
+                    small_bullet[1][j].instantiate_time = SDL_GetTicks() + 15000;
                     small_bullet[1][j].state = Enable;
                     small_bullet[1][j].isParticle = true;
                 }
@@ -300,6 +302,9 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                 }
                 disableKey(tanks[i].fire_key);
             }
+        } else {
+            if(tanks[i].hasShoot == true && tanks[i].hasMachineGun == true)
+                tanks[i].hasMachineGun = false;
         }
         for (int j = 0; j < BULLET_COUNT; j++) {
             if (tanks[i].bullets[j].state != Disable) {

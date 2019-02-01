@@ -50,6 +50,7 @@ typedef struct {
     int forward_key, backward_key, right_key, left_key, fire_key;
     bool hasMachineGun, hasLaser, hasMine, hasBomb;
     int BombState;
+    bool hasShoot;
 } Tank;
 
 typedef struct{
