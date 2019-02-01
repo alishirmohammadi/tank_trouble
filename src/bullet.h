@@ -18,5 +18,6 @@
 
 void MoveBullet(Bullet *bullet);
 void DrawTanksBullets(Tank tanks[], int count, SDL_Renderer *renderer);
+void DrawSmallBullets(SDL_Renderer *renderer, Bullet bullets[], int count);
 
 #endif //ALTER_TANK_BULLET_H

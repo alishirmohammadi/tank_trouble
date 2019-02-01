@@ -20,18 +20,6 @@ tank.h
 structs.h
 /home/ali/alter_tank/src/structs.h
 
-/home/ali/alter_tank/src/items.c
-time.h
--
-items.h
-/home/ali/alter_tank/src/items.h
-
-/home/ali/alter_tank/src/items.h
-structs.h
-/home/ali/alter_tank/src/structs.h
-map.h
-/home/ali/alter_tank/src/map.h
-
 /home/ali/alter_tank/src/keyboard_handler.h
 stdio.h
 -
@@ -43,34 +31,6 @@ SDL2/SDL.h
 -
 SDL2/SDL2_gfxPrimitives.h
 -
-
-/home/ali/alter_tank/src/manager.c
-manager.h
-/home/ali/alter_tank/src/manager.h
-structs.h
-/home/ali/alter_tank/src/structs.h
-colors.h
-/home/ali/alter_tank/src/colors.h
-keyboard_handler.h
-/home/ali/alter_tank/src/keyboard_handler.h
-map.h
-/home/ali/alter_tank/src/map.h
-physics.h
-/home/ali/alter_tank/src/physics.h
-tank.h
-/home/ali/alter_tank/src/tank.h
-particle.h
-/home/ali/alter_tank/src/particle.h
-ui.h
-/home/ali/alter_tank/src/ui.h
-items.h
-/home/ali/alter_tank/src/items.h
-time.h
--
-
-/home/ali/alter_tank/src/manager.h
-structs.h
-/home/ali/alter_tank/src/structs.h
 
 /home/ali/alter_tank/src/map.h
 structs.h
@@ -141,12 +101,6 @@ colors.h
 /home/ali/alter_tank/src/colors.h
 bullet.h
 /home/ali/alter_tank/src/bullet.h
-
-/home/ali/alter_tank/src/ui.h
-SDL_render.h
--
-structs.h
-/home/ali/alter_tank/src/structs.h
 
 /usr/include/SDL2/SDL_blendmode.h
 begin_code.h

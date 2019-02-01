@@ -20,6 +20,8 @@ typedef struct {
     double x, y, vx, vy;
     double instantiate_time;
     BulletState state;
+    bool isBomb;
+    bool isParticle;
 } Bullet;
 
 typedef struct {
@@ -46,6 +48,8 @@ typedef struct {
     int score;
     int last_smoke_time;
     int forward_key, backward_key, right_key, left_key, fire_key;
+    bool hasMachineGun, hasLaser, hasMine, hasBomb;
+    int BombState;
 } Tank;
 
 typedef struct{

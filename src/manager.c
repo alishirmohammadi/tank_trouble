@@ -87,6 +87,7 @@ void InitializeGame(Manager *manager) {
     manager->tanks[1].colorIndex = tank2Color;
     manager->tanks[2].colorIndex = tank3Color;
 
+
     while(true) {
         LoadMap(&manager->map, MapFiles[rand() % MAP_COUNT]);
         int mapMaxX = maxMapX(&manager->map);
@@ -98,6 +99,10 @@ void InitializeGame(Manager *manager) {
                 PointMapToPixel(mapMaxY) + MAP_MARGIN + UI_WIDTH
         );
 
+        Bullet small_bullets[20];
+        for(int i = 0; i < 20; i++)
+            small_bullets[i].state = Disable;
+
         manager->tanks[0].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[0].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
         manager->tanks[0].enable = true;
@@ -108,6 +113,10 @@ void InitializeGame(Manager *manager) {
         manager->tanks[0].fire_key = KEY_SLASH;
         manager->tanks[0].angle = rand() % 31415 / 500.0;
         manager->tanks[0].last_smoke_time = 0;
+        manager->tanks[0].hasBomb = false;
+        manager->tanks[0].hasMachineGun = false;
+        manager->tanks[0].hasMine = false;
+        manager->tanks[0].hasLaser = false;
         for (int i = 0; i < BULLET_COUNT; i++)
             manager->tanks[0].bullets[i].state = Disable;
 
@@ -121,6 +130,10 @@ void InitializeGame(Manager *manager) {
         manager->tanks[1].fire_key = KEY_Q;
         manager->tanks[1].angle = rand() % 31415 / 500.0;
         manager->tanks[1].last_smoke_time = 0;
+        manager->tanks[1].hasBomb = false;
+        manager->tanks[1].hasMachineGun = false;
+        manager->tanks[1].hasMine = false;
+        manager->tanks[1].hasLaser = false;
         for (int i = 0; i < BULLET_COUNT; i++)
             manager->tanks[1].bullets[i].state = Disable;
 
@@ -134,6 +147,10 @@ void InitializeGame(Manager *manager) {
         manager->tanks[2].fire_key = KEY_M;
         manager->tanks[2].angle = rand() % 31415 / 500.0;
         manager->tanks[2].last_smoke_time = 0;
+        manager->tanks[2].hasBomb = false;
+        manager->tanks[2].hasMachineGun = false;
+        manager->tanks[2].hasMine = false;
+        manager->tanks[2].hasLaser = false;
         for (int i = 0; i < BULLET_COUNT; i++)
             manager->tanks[2].bullets[i].state = Disable;
 
@@ -169,13 +186,14 @@ void InitializeGame(Manager *manager) {
             SDL_SetRenderDrawColor(manager->renderer, 230, 230, 230, 255);
             SDL_RenderClear(manager->renderer);
 
-            PhysicsRenderer(manager->tanks, manager->tank_count, &manager->map, smoke, SMOKE_COUNT, manager);
+            PhysicsRenderer(manager->tanks, manager->tank_count, &manager->map, smoke, SMOKE_COUNT, manager, small_bullets);
             SmokeRenderer(smoke, SMOKE_COUNT);
 
             DrawMap(&manager->map, manager->renderer);
             DrawItem(manager->renderer, manager->item, items_textures);
             DrawTank(manager->tanks, manager->tank_count, manager->renderer);
             DrawTanksBullets(manager->tanks, manager->tank_count, manager->renderer);
+            DrawSmallBullets(manager->renderer, small_bullets, 20);
             DrawSmoke(manager->renderer, smoke, SMOKE_COUNT);
             UITankScore(manager->renderer, manager->tanks, manager->tank_count, mapMaxX, mapMaxY, Textures);
 

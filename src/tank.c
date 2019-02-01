@@ -42,8 +42,8 @@ void TankBackwardY(Tank *tank) {
 }
 
 void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
-    for(int i = 0; i < count; i++) {
-        if(!tank[i].enable)
+    for (int i = 0; i < count; i++) {
+        if (!tank[i].enable)
             continue;
         filledCircleRGBA(
                 renderer,
@@ -58,18 +58,52 @@ void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
                 renderer,
                 tank[i].x,
                 tank[i].y,
-                TANK_RADIUS/2,
+                TANK_RADIUS / 2,
                 0,
                 0,
                 0,
                 tank[i].color.alpha);
-        thickLineRGBA(
-                renderer,
-                tank[i].x + (TANK_RADIUS - 1) * cos(tank[i].angle),
-                tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
-                tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle),
-                tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle),
-                4, 0, 0, 0, 255);
+        if (tank[i].hasMine == false && (tank[i].hasBomb == false || tank[i].BombState == 1) && tank[i].hasLaser == false && tank[i].hasMachineGun == false) {
+            thickLineRGBA(
+                    renderer,
+                    tank[i].x + (TANK_RADIUS - 1) * cos(tank[i].angle),
+                    tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
+                    tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle),
+                    tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle),
+                    4, 0, 0, 0, 255);
+        } else if(tank[i].hasMine == true) {
+            thickLineRGBA(
+                    renderer,
+                    tank[i].x,
+                    tank[i].y,
+                    tank[i].x + TANK_RADIUS * cos(tank[i].angle),
+                    tank[i].y + TANK_RADIUS * sin(tank[i].angle),
+                    4, 0, 0, 0, 255);
+        } else if(tank[i].hasBomb == true) {
+            thickLineRGBA(
+                    renderer,
+                    tank[i].x + (TANK_RADIUS - 1) * cos(tank[i].angle),
+                    tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
+                    tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle),
+                    tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle),
+                    6, 0, 0, 0, 255);
+        } else if(tank[i].hasLaser == true) {
+            thickLineRGBA(
+                    renderer,
+                    tank[i].x + (TANK_RADIUS - 1) * cos(tank[i].angle),
+                    tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
+                    tank[i].x + TANK_GUN_LENGTH * 1.2 * cos(tank[i].angle),
+                    tank[i].y + TANK_GUN_LENGTH * 1.2 * sin(tank[i].angle),
+                    4, 0, 0, 0, 55 + abs(SDL_GetTicks() % 400 - 200));
+        } else if(tank[i].hasMachineGun == true) {
+            thickLineRGBA(
+                    renderer,
+                    tank[i].x + (TANK_RADIUS - 1) * cos(tank[i].angle),
+                    tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
+                    tank[i].x + TANK_GUN_LENGTH * cos(tank[i].angle),
+                    tank[i].y + TANK_GUN_LENGTH * sin(tank[i].angle),
+                    10, 0, 0, 0, 255);
+        }
     }
 }
 

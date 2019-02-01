@@ -17,18 +17,41 @@ void MoveBullet(Bullet *bullet) {
 }
 
 void DrawTanksBullets(Tank tanks[], int count, SDL_Renderer *renderer) {
-    for(int i = 0; i < count; i++)
-        for(int j = 0; j < BULLET_COUNT; j++)
-            if(tanks[i].bullets[j].state != Disable)
+    for (int i = 0; i < count; i++)
+        for (int j = 0; j < BULLET_COUNT; j++)
+            if (tanks[i].bullets[j].state != Disable) {
+                double scale = tanks[i].bullets[j].isBomb == true ? 1.5 : 1;
                 filledCircleRGBA(
                         renderer,
                         tanks[i].bullets[j].x,
                         tanks[i].bullets[j].y,
-                        BULLET_RADIUS,
+                        BULLET_RADIUS * scale,
                         BULLET_COLOR.red,
                         BULLET_COLOR.green,
                         BULLET_COLOR.blue,
                         BULLET_COLOR.alpha * (tanks[i].bullets[j].state == Enable ? 1.0 :
-                                              (BULLET_FADE_TIME * 1000 - (SDL_GetTicks() - tanks[i].bullets[j].instantiate_time - BULLET_LIFETIME * 1000)) / (BULLET_FADE_TIME * 1000))
-                        );
+                                              (BULLET_FADE_TIME * 1000 -
+                                               (SDL_GetTicks() - tanks[i].bullets[j].instantiate_time -
+                                                BULLET_LIFETIME * 1000)) / (BULLET_FADE_TIME * 1000))
+                );
+            }
+}
+
+void DrawSmallBullets(SDL_Renderer *renderer, Bullet bullets[], int count) {
+    for (int i = 0; i < count; i++) {
+        if (bullets[i].state != Disable)
+            filledCircleRGBA(
+                    renderer,
+                    bullets[i].x,
+                    bullets[i].y,
+                    BULLET_RADIUS * 0.8,
+                    BULLET_COLOR.red,
+                    BULLET_COLOR.green,
+                    BULLET_COLOR.blue,
+                    BULLET_COLOR.alpha * (bullets[i].state == Enable ? 1.0 :
+                                          (BULLET_FADE_TIME * 1000 -
+                                           (SDL_GetTicks() - bullets[i].instantiate_time -
+                                            BULLET_LIFETIME * 1000)) / (BULLET_FADE_TIME * 1000))
+            );
+    }
 }
