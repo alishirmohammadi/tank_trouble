@@ -104,6 +104,7 @@ typedef struct {
     SDL_Renderer *renderer;
     int WinScore;
     Item item[MAX_ITEM_COUNT];
+    bool isLoaded;
 } Manager;
 
 typedef struct {

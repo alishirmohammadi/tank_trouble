@@ -141,7 +141,7 @@ Action GameMenu(Manager *manager) {
     const double FPS = 100;
     while (true) {
         action = handleEvents(manager);
-        if(action == Exit || action == Play2v2 || action == Play3v3)
+        if(action == Exit || action == Play2v2 || action == Play3v3 || action == Load)
             break;
         if(action == Setting)
             LoadSetting(manager);
