@@ -98,6 +98,12 @@
 		<Unit filename="/home/ali/alter_tank/src/graphics.h">
 			<Option target="alter_tank"/>
 		</Unit>
+		<Unit filename="/home/ali/alter_tank/src/items.c">
+			<Option target="alter_tank"/>
+		</Unit>
+		<Unit filename="/home/ali/alter_tank/src/items.h">
+			<Option target="alter_tank"/>
+		</Unit>
 		<Unit filename="/home/ali/alter_tank/src/keyboard_handler.c">
 			<Option target="alter_tank"/>
 		</Unit>

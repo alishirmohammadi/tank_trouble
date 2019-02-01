@@ -7,12 +7,15 @@
 #include "tank.h"
 #include "particle.h"
 #include "ui.h"
+#include "items.h"
 #include <time.h>
 #define RELOAD_TIME 3
 #define TANK_COLOR_COUNT 6
+#define ITEM_TYPE_COUNT 4
+#define ITEM_FREQUENCY 300
 
-SDL_Surface *Surfaces[TANK_COLOR_COUNT];
-SDL_Texture *Textures[TANK_COLOR_COUNT];
+SDL_Surface *Surfaces[TANK_COLOR_COUNT], *items_surfaces[ITEM_TYPE_COUNT];
+SDL_Texture *Textures[TANK_COLOR_COUNT], *items_textures[ITEM_TYPE_COUNT];
 
 Action gameHandleEvent() {
     SDL_Event event;
@@ -53,6 +56,10 @@ void InitializeGame(Manager *manager) {
     Surfaces[3] = SDL_LoadBMP("../images/tank_yellow.bmp");
     Surfaces[4] = SDL_LoadBMP("../images/tank_orange.bmp");
     Surfaces[5] = SDL_LoadBMP("../images/tank_brown.bmp");
+    items_surfaces[Bomb] = SDL_LoadBMP("../images/bomb.bmp");
+    items_surfaces[Mine] = SDL_LoadBMP("../images/mine.bmp");
+    items_surfaces[MachineGun] = SDL_LoadBMP("../images/machine_gun.bmp");
+    items_surfaces[Laser] = SDL_LoadBMP("../images/laser.bmp");
 
     Textures[0] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[0]);
     Textures[1] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[1]);
@@ -60,6 +67,10 @@ void InitializeGame(Manager *manager) {
     Textures[3] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[3]);
     Textures[4] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[4]);
     Textures[5] = SDL_CreateTextureFromSurface(manager->renderer, Surfaces[5]);
+    items_textures[Bomb] = SDL_CreateTextureFromSurface(manager->renderer, items_surfaces[Bomb]);
+    items_textures[Mine] = SDL_CreateTextureFromSurface(manager->renderer, items_surfaces[Mine]);
+    items_textures[MachineGun] = SDL_CreateTextureFromSurface(manager->renderer, items_surfaces[MachineGun]);
+    items_textures[Laser] = SDL_CreateTextureFromSurface(manager->renderer, items_surfaces[Laser]);
 
 
     FILE *f = fopen("../alter_tank.conf", "r");
@@ -87,7 +98,6 @@ void InitializeGame(Manager *manager) {
                 PointMapToPixel(mapMaxY) + MAP_MARGIN + UI_WIDTH
         );
 
-        // mapGenerator(&manager->map);
         manager->tanks[0].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[0].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
         manager->tanks[0].enable = true;
@@ -132,6 +142,10 @@ void InitializeGame(Manager *manager) {
             smoke[i].enable = false;
         }
 
+        for (int i = 0; i < MAX_ITEM_COUNT; i++)
+            manager->item[i].enable = false;
+
+
         const double FPS = 100;
         Action action;
 
@@ -142,6 +156,16 @@ void InitializeGame(Manager *manager) {
 
             int start_ticks = SDL_GetTicks();
 
+            if(rand() % ITEM_FREQUENCY == 0) {
+                int x, y;
+                if (CreateItem(manager->item, &manager->map, &x, &y) == true) {
+                    int disableSmokeId = 0;
+                    while (disableSmokeId < SMOKE_COUNT && smoke[disableSmokeId].enable == true)
+                        disableSmokeId++;
+                    SmallSmoke(&smoke[disableSmokeId], x, y);
+                }
+            }
+
             SDL_SetRenderDrawColor(manager->renderer, 230, 230, 230, 255);
             SDL_RenderClear(manager->renderer);
 
@@ -149,6 +173,7 @@ void InitializeGame(Manager *manager) {
             SmokeRenderer(smoke, SMOKE_COUNT);
 
             DrawMap(&manager->map, manager->renderer);
+            DrawItem(manager->renderer, manager->item, items_textures);
             DrawTank(manager->tanks, manager->tank_count, manager->renderer);
             DrawTanksBullets(manager->tanks, manager->tank_count, manager->renderer);
             DrawSmoke(manager->renderer, smoke, SMOKE_COUNT);

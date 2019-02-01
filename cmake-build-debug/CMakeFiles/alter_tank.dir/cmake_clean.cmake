@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/alter_tank.dir/src/bullet.c.o"
   "CMakeFiles/alter_tank.dir/src/colors.c.o"
   "CMakeFiles/alter_tank.dir/src/graphics.c.o"
+  "CMakeFiles/alter_tank.dir/src/items.c.o"
   "CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
   "CMakeFiles/alter_tank.dir/src/main.c.o"
   "CMakeFiles/alter_tank.dir/src/main_manu.c.o"

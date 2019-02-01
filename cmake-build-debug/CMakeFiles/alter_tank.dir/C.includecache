@@ -20,6 +20,18 @@ tank.h
 structs.h
 /home/ali/alter_tank/src/structs.h
 
+/home/ali/alter_tank/src/items.c
+time.h
+-
+items.h
+/home/ali/alter_tank/src/items.h
+
+/home/ali/alter_tank/src/items.h
+structs.h
+/home/ali/alter_tank/src/structs.h
+map.h
+/home/ali/alter_tank/src/map.h
+
 /home/ali/alter_tank/src/keyboard_handler.h
 stdio.h
 -
@@ -51,6 +63,8 @@ particle.h
 /home/ali/alter_tank/src/particle.h
 ui.h
 /home/ali/alter_tank/src/ui.h
+items.h
+/home/ali/alter_tank/src/items.h
 time.h
 -
 
@@ -65,6 +79,36 @@ structs.h
 /home/ali/alter_tank/src/particle.h
 structs.h
 /home/ali/alter_tank/src/structs.h
+
+/home/ali/alter_tank/src/physics.c
+stdio.h
+-
+stdbool.h
+-
+stdlib.h
+-
+math.h
+-
+SDL2/SDL.h
+-
+SDL2/SDL2_gfxPrimitives.h
+-
+tank.h
+/home/ali/alter_tank/src/tank.h
+bullet.h
+/home/ali/alter_tank/src/bullet.h
+map.h
+/home/ali/alter_tank/src/map.h
+keyboard_handler.h
+/home/ali/alter_tank/src/keyboard_handler.h
+colors.h
+/home/ali/alter_tank/src/colors.h
+physics.h
+/home/ali/alter_tank/src/physics.h
+structs.h
+/home/ali/alter_tank/src/structs.h
+particle.h
+/home/ali/alter_tank/src/particle.h
 
 /home/ali/alter_tank/src/physics.h
 structs.h

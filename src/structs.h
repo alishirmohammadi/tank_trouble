@@ -10,6 +10,7 @@
 #include <SDL_render.h>
 
 #define BULLET_COUNT 5
+#define MAX_ITEM_COUNT 4
 
 typedef enum {
     Enable, Disable, FadeOut
@@ -75,6 +76,16 @@ typedef struct {
     Action action;
 } Button;
 
+typedef enum {
+    Bomb=0, Mine=1, MachineGun=2, Laser=3
+} ItemType;
+
+typedef struct {
+    int x, y;
+    ItemType type;
+    bool enable;
+} Item;
+
 typedef struct {
     Map map;
     int tank_count;
@@ -84,7 +95,7 @@ typedef struct {
     SDL_Window *window;
     SDL_Renderer *renderer;
     int WinScore;
-
+    Item item[MAX_ITEM_COUNT];
 } Manager;
 
 typedef struct {

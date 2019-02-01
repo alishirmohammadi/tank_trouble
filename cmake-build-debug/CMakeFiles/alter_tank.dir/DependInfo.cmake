@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/ali/alter_tank/src/bullet.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/bullet.c.o"
   "/home/ali/alter_tank/src/colors.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/colors.c.o"
   "/home/ali/alter_tank/src/graphics.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/graphics.c.o"
+  "/home/ali/alter_tank/src/items.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/items.c.o"
   "/home/ali/alter_tank/src/keyboard_handler.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
   "/home/ali/alter_tank/src/main.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/main.c.o"
   "/home/ali/alter_tank/src/main_manu.c" "/home/ali/alter_tank/cmake-build-debug/CMakeFiles/alter_tank.dir/src/main_manu.c.o"

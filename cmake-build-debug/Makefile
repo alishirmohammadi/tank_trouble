@@ -204,6 +204,33 @@ src/graphics.c.s:
 	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/graphics.c.s
 .PHONY : src/graphics.c.s
 
+src/items.o: src/items.c.o
+
+.PHONY : src/items.o
+
+# target to build an object file
+src/items.c.o:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/items.c.o
+.PHONY : src/items.c.o
+
+src/items.i: src/items.c.i
+
+.PHONY : src/items.i
+
+# target to preprocess a source file
+src/items.c.i:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/items.c.i
+.PHONY : src/items.c.i
+
+src/items.s: src/items.c.s
+
+.PHONY : src/items.s
+
+# target to generate assembly for a file
+src/items.c.s:
+	$(MAKE) -f CMakeFiles/alter_tank.dir/build.make CMakeFiles/alter_tank.dir/src/items.c.s
+.PHONY : src/items.c.s
+
 src/keyboard_handler.o: src/keyboard_handler.c.o
 
 .PHONY : src/keyboard_handler.o
@@ -519,6 +546,9 @@ help:
 	@echo "... src/graphics.o"
 	@echo "... src/graphics.i"
 	@echo "... src/graphics.s"
+	@echo "... src/items.o"
+	@echo "... src/items.i"
+	@echo "... src/items.s"
 	@echo "... src/keyboard_handler.o"
 	@echo "... src/keyboard_handler.i"
 	@echo "... src/keyboard_handler.s"

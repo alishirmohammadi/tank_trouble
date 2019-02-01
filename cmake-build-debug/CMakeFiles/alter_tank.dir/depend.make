@@ -45,6 +45,25 @@ CMakeFiles/alter_tank.dir/src/colors.c.o: /usr/include/SDL2/close_code.h
 CMakeFiles/alter_tank.dir/src/graphics.c.o: ../src/graphics.c
 CMakeFiles/alter_tank.dir/src/graphics.c.o: ../src/graphics.h
 
+CMakeFiles/alter_tank.dir/src/items.c.o: ../src/items.c
+CMakeFiles/alter_tank.dir/src/items.c.o: ../src/items.h
+CMakeFiles/alter_tank.dir/src/items.c.o: ../src/map.h
+CMakeFiles/alter_tank.dir/src/items.c.o: ../src/structs.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_blendmode.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_config.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_endian.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_error.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_pixels.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_platform.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_rect.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_render.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_rwops.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_stdinc.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_surface.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/SDL_video.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/begin_code.h
+CMakeFiles/alter_tank.dir/src/items.c.o: /usr/include/SDL2/close_code.h
+
 CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o: ../src/keyboard_handler.c
 CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o: ../src/keyboard_handler.h
 
@@ -166,6 +185,7 @@ CMakeFiles/alter_tank.dir/src/main_manu.c.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/bullet.h
 CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/colors.h
+CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/items.h
 CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/keyboard_handler.h
 CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/manager.c
 CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/manager.h

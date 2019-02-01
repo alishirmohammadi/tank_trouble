@@ -96,9 +96,22 @@ CMakeFiles/alter_tank.dir/src/graphics.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/alter_tank.dir/src/graphics.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ali/alter_tank/src/graphics.c -o CMakeFiles/alter_tank.dir/src/graphics.c.s
 
+CMakeFiles/alter_tank.dir/src/items.c.o: CMakeFiles/alter_tank.dir/flags.make
+CMakeFiles/alter_tank.dir/src/items.c.o: ../src/items.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/alter_tank.dir/src/items.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/items.c.o   -c /home/ali/alter_tank/src/items.c
+
+CMakeFiles/alter_tank.dir/src/items.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/alter_tank.dir/src/items.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ali/alter_tank/src/items.c > CMakeFiles/alter_tank.dir/src/items.c.i
+
+CMakeFiles/alter_tank.dir/src/items.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/alter_tank.dir/src/items.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ali/alter_tank/src/items.c -o CMakeFiles/alter_tank.dir/src/items.c.s
+
 CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o: ../src/keyboard_handler.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o   -c /home/ali/alter_tank/src/keyboard_handler.c
 
 CMakeFiles/alter_tank.dir/src/keyboard_handler.c.i: cmake_force
@@ -111,7 +124,7 @@ CMakeFiles/alter_tank.dir/src/keyboard_handler.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/main.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/main.c.o: ../src/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/alter_tank.dir/src/main.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/alter_tank.dir/src/main.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/main.c.o   -c /home/ali/alter_tank/src/main.c
 
 CMakeFiles/alter_tank.dir/src/main.c.i: cmake_force
@@ -124,7 +137,7 @@ CMakeFiles/alter_tank.dir/src/main.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/main_manu.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/main_manu.c.o: ../src/main_manu.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/alter_tank.dir/src/main_manu.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/alter_tank.dir/src/main_manu.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/main_manu.c.o   -c /home/ali/alter_tank/src/main_manu.c
 
 CMakeFiles/alter_tank.dir/src/main_manu.c.i: cmake_force
@@ -137,7 +150,7 @@ CMakeFiles/alter_tank.dir/src/main_manu.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/manager.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/manager.c.o: ../src/manager.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/alter_tank.dir/src/manager.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/alter_tank.dir/src/manager.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/manager.c.o   -c /home/ali/alter_tank/src/manager.c
 
 CMakeFiles/alter_tank.dir/src/manager.c.i: cmake_force
@@ -150,7 +163,7 @@ CMakeFiles/alter_tank.dir/src/manager.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/map.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/map.c.o: ../src/map.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/alter_tank.dir/src/map.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/alter_tank.dir/src/map.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/map.c.o   -c /home/ali/alter_tank/src/map.c
 
 CMakeFiles/alter_tank.dir/src/map.c.i: cmake_force
@@ -163,7 +176,7 @@ CMakeFiles/alter_tank.dir/src/map.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/particle.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/particle.c.o: ../src/particle.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/alter_tank.dir/src/particle.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/alter_tank.dir/src/particle.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/particle.c.o   -c /home/ali/alter_tank/src/particle.c
 
 CMakeFiles/alter_tank.dir/src/particle.c.i: cmake_force
@@ -176,7 +189,7 @@ CMakeFiles/alter_tank.dir/src/particle.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/physics.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/physics.c.o: ../src/physics.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/alter_tank.dir/src/physics.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/alter_tank.dir/src/physics.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/physics.c.o   -c /home/ali/alter_tank/src/physics.c
 
 CMakeFiles/alter_tank.dir/src/physics.c.i: cmake_force
@@ -189,7 +202,7 @@ CMakeFiles/alter_tank.dir/src/physics.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/setting.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/setting.c.o: ../src/setting.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/alter_tank.dir/src/setting.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/alter_tank.dir/src/setting.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/setting.c.o   -c /home/ali/alter_tank/src/setting.c
 
 CMakeFiles/alter_tank.dir/src/setting.c.i: cmake_force
@@ -202,7 +215,7 @@ CMakeFiles/alter_tank.dir/src/setting.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/structs.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/structs.c.o: ../src/structs.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/alter_tank.dir/src/structs.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/alter_tank.dir/src/structs.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/structs.c.o   -c /home/ali/alter_tank/src/structs.c
 
 CMakeFiles/alter_tank.dir/src/structs.c.i: cmake_force
@@ -215,7 +228,7 @@ CMakeFiles/alter_tank.dir/src/structs.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/tank.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/tank.c.o: ../src/tank.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/alter_tank.dir/src/tank.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/alter_tank.dir/src/tank.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/tank.c.o   -c /home/ali/alter_tank/src/tank.c
 
 CMakeFiles/alter_tank.dir/src/tank.c.i: cmake_force
@@ -228,7 +241,7 @@ CMakeFiles/alter_tank.dir/src/tank.c.s: cmake_force
 
 CMakeFiles/alter_tank.dir/src/ui.c.o: CMakeFiles/alter_tank.dir/flags.make
 CMakeFiles/alter_tank.dir/src/ui.c.o: ../src/ui.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/alter_tank.dir/src/ui.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/alter_tank.dir/src/ui.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/alter_tank.dir/src/ui.c.o   -c /home/ali/alter_tank/src/ui.c
 
 CMakeFiles/alter_tank.dir/src/ui.c.i: cmake_force
@@ -244,6 +257,7 @@ alter_tank_OBJECTS = \
 "CMakeFiles/alter_tank.dir/src/bullet.c.o" \
 "CMakeFiles/alter_tank.dir/src/colors.c.o" \
 "CMakeFiles/alter_tank.dir/src/graphics.c.o" \
+"CMakeFiles/alter_tank.dir/src/items.c.o" \
 "CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o" \
 "CMakeFiles/alter_tank.dir/src/main.c.o" \
 "CMakeFiles/alter_tank.dir/src/main_manu.c.o" \
@@ -262,6 +276,7 @@ alter_tank_EXTERNAL_OBJECTS =
 alter_tank: CMakeFiles/alter_tank.dir/src/bullet.c.o
 alter_tank: CMakeFiles/alter_tank.dir/src/colors.c.o
 alter_tank: CMakeFiles/alter_tank.dir/src/graphics.c.o
+alter_tank: CMakeFiles/alter_tank.dir/src/items.c.o
 alter_tank: CMakeFiles/alter_tank.dir/src/keyboard_handler.c.o
 alter_tank: CMakeFiles/alter_tank.dir/src/main.c.o
 alter_tank: CMakeFiles/alter_tank.dir/src/main_manu.c.o
@@ -275,7 +290,7 @@ alter_tank: CMakeFiles/alter_tank.dir/src/tank.c.o
 alter_tank: CMakeFiles/alter_tank.dir/src/ui.c.o
 alter_tank: CMakeFiles/alter_tank.dir/build.make
 alter_tank: CMakeFiles/alter_tank.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking C executable alter_tank"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ali/alter_tank/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking C executable alter_tank"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/alter_tank.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

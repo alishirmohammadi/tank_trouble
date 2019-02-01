@@ -145,7 +145,6 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     }
                 }
             }
-            printf("salam");
             if(CanChangeX)
                 TankBackwardX(&tanks[i]);
             if(CanChangeY)
