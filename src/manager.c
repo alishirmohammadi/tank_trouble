@@ -73,6 +73,15 @@ Action PauseMenuHandleEvent() {
     }
 }
 
+Action WinHandleEvent() {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            return Exit;
+        }
+    }
+}
+
 
 void PauseMenu(Manager *manager) {
     const double FPS = 100;
@@ -144,6 +153,42 @@ void PauseMenu(Manager *manager) {
             );
             SDL_RenderSetScale(manager->renderer, 1, 1);
         }
+
+        SDL_RenderPresent(manager->renderer);
+
+        int start_ticks = SDL_GetTicks();
+        while (SDL_GetTicks() - start_ticks < 1000 / FPS);
+    }
+}
+
+
+void WinMenu(Manager *manager, int winner) {
+    const double FPS = 100;
+    Action action;
+    int mapMaxX = maxMapX(&manager->map);
+    ScreenWidth = PointMapToPixel(mapMaxX) + MAP_MARGIN;
+
+    while (true) {
+        action = WinHandleEvent();
+        if(action == Exit || action == Resume)
+            break;
+
+        SDL_SetRenderDrawColor(manager->renderer, 230, 230, 230, 255);
+        SDL_RenderClear(manager->renderer);
+
+        float scale = 2;
+        SDL_RenderSetScale(manager->renderer, scale, scale);
+        char s[20];
+        sprintf(s, "Player %d win", winner);
+        stringRGBA(
+                manager->renderer,
+                (ScreenWidth / 2 - 12 * 8) / scale,
+                (BUTTON_TOP + 2 * BUTTON_DISTANCE) / scale,
+                s,
+                0, 0, 0, 255
+        );
+        SDL_RenderSetScale(manager->renderer, 1, 1);
+
 
         SDL_RenderPresent(manager->renderer);
 
@@ -360,11 +405,25 @@ void InitializeGame(Manager *manager) {
 
             while (SDL_GetTicks() - start_ticks < 1000 / FPS);
         }
+
+        for(int i = 0; i < manager->tank_count; i++) {
+            if(manager->tanks[i].enable) {
+                manager->tanks[i].score++;
+            }
+        }
+
+        int Winner = -1;
+        for(int i = 0; i < manager->tank_count; i++)
+            if(manager->tanks[i].score >= max_score)
+                Winner = i;
+
+        if(Winner != -1) {
+            WinMenu(manager, Winner + 1);
+            action = Exit;
+        }
+
         if (action == Exit)
             break;
-        for(int i = 0; i < manager->tank_count; i++)
-            if(manager->tanks[i].enable)
-                manager->tanks[i].score++;
 
         manager->isLoaded = false;
     }
