@@ -199,7 +199,7 @@ void WinMenu(Manager *manager, int winner) {
 
 
 void InitializeGame(Manager *manager) {
-    srand(time(NULL));
+    srand(time(0));
 
     char MapFiles[9][40];
     const int MAP_COUNT = 9;

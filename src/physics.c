@@ -276,8 +276,10 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                 tanks[i].hasShoot = true;
                 int j = 0;
                 while(small_bullet[1][j].state == Enable) j++;
-                if(j == 20)
+                if(j == 20) {
                     tanks[i].hasMachineGun = false;
+                    disableKey(tanks[i].fire_key);
+                }
                 if(rand() % 10 == 0) {
                     float angle = tanks[i].angle + (rand() % 1000 - 500.0) / 5000.0;
                     small_bullet[1][j].x = tanks[i].x + cos(tanks[i].angle) * (TANK_RADIUS - 2);
