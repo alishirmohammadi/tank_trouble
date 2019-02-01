@@ -275,10 +275,11 @@ void InitializeGame(Manager *manager) {
                 PointMapToPixel(mapMaxY) + MAP_MARGIN + UI_WIDTH
         );
 
-        Bullet small_bullets[20];
+        Bullet small_bullets[3][20];
         Bullet machineGunBullets[30];
-        for (int i = 0; i < 20; i++)
-            small_bullets[i].state = Disable;
+        for (int j = 0; j < 3; j++)
+            for (int i = 0; i < 20; i++)
+                small_bullets[j][i].state = Disable;
         for (int i = 0; i < 30; i++)
             machineGunBullets[i].state = Disable;
         if (manager->isLoaded == false) {
@@ -388,7 +389,7 @@ void InitializeGame(Manager *manager) {
             DrawItem(manager->renderer, manager->item, items_textures);
             DrawTank(manager->tanks, manager->tank_count, manager->renderer);
             DrawTanksBullets(manager->tanks, manager->tank_count, manager->renderer);
-            DrawSmallBullets(manager->renderer, small_bullets, 20);
+            DrawSmallBullets(manager->renderer, small_bullets);
             DrawSmoke(manager->renderer, smoke, SMOKE_COUNT);
             UITankScore(manager->renderer, manager->tanks, manager->tank_count, mapMaxX, mapMaxY, Textures);
 

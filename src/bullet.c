@@ -37,20 +37,21 @@ void DrawTanksBullets(Tank tanks[], int count, SDL_Renderer *renderer) {
             }
 }
 
-void DrawSmallBullets(SDL_Renderer *renderer, Bullet bullets[], int count) {
-    for (int i = 0; i < count; i++) {
-        if (bullets[i].state != Disable)
+void DrawSmallBullets(SDL_Renderer *renderer, Bullet bullets[][20]) {
+    for(int j = 0; j < 3; j++)
+    for (int i = 0; i < 20; i++) {
+        if (bullets[j][i].state != Disable)
             filledCircleRGBA(
                     renderer,
-                    bullets[i].x,
-                    bullets[i].y,
+                    bullets[j][i].x,
+                    bullets[j][i].y,
                     BULLET_RADIUS * 0.8,
                     BULLET_COLOR.red,
                     BULLET_COLOR.green,
                     BULLET_COLOR.blue,
-                    BULLET_COLOR.alpha * (bullets[i].state == Enable ? 1.0 :
+                    BULLET_COLOR.alpha * (bullets[j][i].state == Enable ? 1.0 :
                                           (BULLET_FADE_TIME * 1000 -
-                                           (SDL_GetTicks() - bullets[i].instantiate_time -
+                                           (SDL_GetTicks() - bullets[j][i].instantiate_time -
                                             BULLET_LIFETIME * 1000)) / (BULLET_FADE_TIME * 1000))
             );
     }

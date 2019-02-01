@@ -41,7 +41,6 @@ bool CreateItem(Item items[], Map *map, int *x, int *y, Manager *manager) {
     for(int j = 0; j < manager->tank_count; j++) {
         minDistance = minimum(minDistance, local_magnitude(ItemX - manager->tanks[j].x, ItemY - manager->tanks[j].y));
     }
-    printf("%f\n", minDistance);
     if(minDistance < 59) {
         items[i].enable = false;
         items[i].x = -100;

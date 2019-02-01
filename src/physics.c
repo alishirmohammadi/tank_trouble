@@ -55,7 +55,7 @@ void SmokeRenderer(Smoke smoke[], int count) {
     }
 }
 
-void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_count, Manager *manager, Bullet small_bullet[]) {
+void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_count, Manager *manager, Bullet small_bullet[][20]) {
     for (int i = 0; i < count; i++) {
         if (getKeyState(tanks[i].right_key) && tanks[i].enable)
             TankRotateLeft(&tanks[i]);
@@ -258,23 +258,39 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     }
                     if (bombIndex != -1) {
                         for (int j = 0; j < 20; j++) {
-                            small_bullet[j].state = Enable;
-                            small_bullet[j].instantiate_time = SDL_GetTicks();
+                            small_bullet[0][j].state = Enable;
+                            small_bullet[0][j].instantiate_time = SDL_GetTicks();
                             float angle = rand() % 31415 / 500.0;
-                            small_bullet[j].vx = cos(angle) * 1.5;
-                            small_bullet[j].vy = sin(angle) * 1.5;
-                            small_bullet[j].x = x;
-                            small_bullet[j].y = y;
+                            small_bullet[0][j].vx = cos(angle) * 1.5;
+                            small_bullet[0][j].vy = sin(angle) * 1.5;
+                            small_bullet[0][j].x = x;
+                            small_bullet[0][j].y = y;
                         }
                         tanks[i].hasBomb = false;
                         disableKey(tanks[i].fire_key);
                         tanks[i].BombState = 0;
                     }
                 }
+            } else if (tanks[i].hasMachineGun) {
+                int j = 0;
+                while(small_bullet[1][j].state == Enable) j++;
+                if(j == 20)
+                    tanks[i].hasMachineGun = false;
+                if(rand() % 10 == 0) {
+                    float angle = tanks[i].angle + (rand() % 1000 - 500.0) / 5000.0;
+                    small_bullet[1][j].x = tanks[i].x + cos(tanks[i].angle) * (TANK_RADIUS - 2);
+                    small_bullet[1][j].y = tanks[i].y + sin(tanks[i].angle) * (TANK_RADIUS - 2);
+                    small_bullet[1][j].vx = cos(angle) * 1.4;
+                    small_bullet[1][j].vy = sin(angle) * 1.4;
+                    small_bullet[1][j].instantiate_time = SDL_GetTicks() + 10000;
+                    small_bullet[1][j].state = Enable;
+                    small_bullet[1][j].isParticle = true;
+                }
             } else {
                 int j = 0;
                 for (; j < BULLET_COUNT && tanks[i].bullets[j].state != Disable; j++);
                 if (j != BULLET_COUNT) {
+                    tanks[i].bullets[j].isBomb = false;
                     tanks[i].bullets[j].state = Enable;
                     tanks[i].bullets[j].x = tanks[i].x + cos(tanks[i].angle) * (TANK_RADIUS - 2);
                     tanks[i].bullets[j].y = tanks[i].y + sin(tanks[i].angle) * (TANK_RADIUS - 2);
@@ -317,13 +333,13 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                         tanks[i].bullets[j].state = FadeOut;
                     else {
                         for (int k = 0; k < 20; k++) {
-                            small_bullet[k].state = Enable;
-                            small_bullet[k].instantiate_time = SDL_GetTicks();
+                            small_bullet[0][k].state = Enable;
+                            small_bullet[0][k].instantiate_time = SDL_GetTicks();
                             float angle = rand() % 31415 / 500.0;
-                            small_bullet[k].vx = cos(angle) * 1.5;
-                            small_bullet[k].vy = sin(angle) * 1.5;
-                            small_bullet[k].x = tanks[i].bullets[j].x;
-                            small_bullet[k].y = tanks[i].bullets[j].y;
+                            small_bullet[0][k].vx = cos(angle) * 1.5;
+                            small_bullet[0][k].vy = sin(angle) * 1.5;
+                            small_bullet[0][k].x = tanks[i].bullets[j].x;
+                            small_bullet[0][k].y = tanks[i].bullets[j].y;
                         }
                         for(int k = 0; k < count; k++) {
                             tanks[k].hasBomb = false;
@@ -347,13 +363,13 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
 
                         if(tanks[i].bullets[j].isBomb == true) {
                             for (int h = 0; h < 20; h++) {
-                                small_bullet[h].state = Enable;
-                                small_bullet[h].instantiate_time = SDL_GetTicks();
+                                small_bullet[0][h].state = Enable;
+                                small_bullet[0][h].instantiate_time = SDL_GetTicks();
                                 float angle = rand() % 31415 / 500.0;
-                                small_bullet[h].vx = cos(angle) * 1.5;
-                                small_bullet[h].vy = sin(angle) * 1.5;
-                                small_bullet[h].x = tanks[i].bullets[j].x;
-                                small_bullet[h].y = tanks[i].bullets[j].y;
+                                small_bullet[0][h].vx = cos(angle) * 1.5;
+                                small_bullet[0][h].vy = sin(angle) * 1.5;
+                                small_bullet[0][h].x = tanks[i].bullets[j].x;
+                                small_bullet[0][h].y = tanks[i].bullets[j].y;
                             }
                             for(int h = 0; h < count; h++) {
                                 tanks[h].hasBomb = false;
@@ -374,12 +390,13 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
             }
         }
     }
+    for (int b = 0; b < 3; b++)
     for (int i = 0; i < 20; i++) {
-        if (small_bullet[i].state != Disable) {
-            double x = small_bullet[i].x;
-            double y = small_bullet[i].y;
-            double newX = x + small_bullet[i].vx * BULLET_SPEED;
-            double newY = y + small_bullet[i].vy * BULLET_SPEED;
+        if (small_bullet[b][i].state != Disable) {
+            double x = small_bullet[b][i].x;
+            double y = small_bullet[b][i].y;
+            double newX = x + small_bullet[b][i].vx * BULLET_SPEED;
+            double newY = y + small_bullet[b][i].vy * BULLET_SPEED;
             for (int k = 0; k < map->wall_count; k++) {
                 int x1, x2, y1, y2;
                 x1 = PointMapToPixel(min(map->walls[k].x1, map->walls[k].x2));
@@ -390,20 +407,28 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     if (y >= y1 - WALL_WIDTH / 2 && y <= y2 + WALL_WIDTH / 2) {
                         if ((newX <= x1 + WALL_WIDTH / 2 && x >= x2 + WALL_WIDTH / 2) ||
                             (newX >= x1 - WALL_WIDTH / 2 && x <= x1 - WALL_WIDTH / 2)) {
-                            small_bullet[i].instantiate_time = SDL_GetTicks() - BULLET_LIFETIME * 1000;
-                            small_bullet[i].state = FadeOut;
-                            small_bullet[i].vx = 0;
-                            small_bullet[i].vy = 0;
+                            if (b != 1) {
+                                small_bullet[b][i].instantiate_time = SDL_GetTicks() - BULLET_LIFETIME * 1000;
+                                small_bullet[b][i].state = FadeOut;
+                                small_bullet[b][i].vx = 0;
+                                small_bullet[b][i].vy = 0;
+                            } else {
+                                small_bullet[b][i].vx *= -1;
+                            }
                         }
                     }
                 } else if (y1 == y2) {
                     if (x >= x1 - WALL_WIDTH / 2 && x <= x2 + WALL_WIDTH / 2) {
                         if ((newY <= y1 + WALL_WIDTH / 2 && y >= y1 + WALL_WIDTH / 2) ||
                             (newY >= y1 - WALL_WIDTH / 2 && y <= y1 - WALL_WIDTH / 2)) {
-                            small_bullet[i].instantiate_time = SDL_GetTicks() - BULLET_LIFETIME * 1000;
-                            small_bullet[i].state = FadeOut;
-                            small_bullet[i].vx = 0;
-                            small_bullet[i].vy = 0;
+                            if(b != 1) {
+                                small_bullet[b][i].instantiate_time = SDL_GetTicks() - BULLET_LIFETIME * 1000;
+                                small_bullet[b][i].state = FadeOut;
+                                small_bullet[b][i].vx = 0;
+                                small_bullet[b][i].vy = 0;
+                            } else {
+                                small_bullet[b][i].vy *= -1;
+                            }
                         }
                     }
                 }
@@ -411,9 +436,9 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
             for (int k = 0; k < count; k++) {
                 if (tanks[k].enable == false)
                     continue;
-                if (magnitude(tanks[k].x - small_bullet[i].x, tanks[k].y - small_bullet[i].y) <
+                if (magnitude(tanks[k].x - small_bullet[b][i].x, tanks[k].y - small_bullet[b][i].y) <
                     TANK_RADIUS - BULLET_RADIUS) {
-                    small_bullet[i].state = Disable;
+                    small_bullet[b][i].state = Disable;
                     tanks[k].enable = false;
                     manager->last_destroy_time = SDL_GetTicks();
                     int disableSmokeId = 0;
@@ -423,12 +448,12 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                 }
             }
 
-            MoveBullet(&small_bullet[i]);
-            if (SDL_GetTicks() - small_bullet[i].instantiate_time > BULLET_LIFETIME * 1000) {
-                small_bullet[i].state = FadeOut;
+            MoveBullet(&small_bullet[b][i]);
+            if (SDL_GetTicks() - small_bullet[b][i].instantiate_time > BULLET_LIFETIME * 1000) {
+                small_bullet[b][i].state = FadeOut;
             }
-            if (SDL_GetTicks() - small_bullet[i].instantiate_time >= (BULLET_LIFETIME + BULLET_FADE_TIME) * 1000) {
-                small_bullet[i].state = Disable;
+            if (SDL_GetTicks() - small_bullet[b][i].instantiate_time >= (BULLET_LIFETIME + BULLET_FADE_TIME) * 1000) {
+                small_bullet[b][i].state = Disable;
             }
         }
     }
