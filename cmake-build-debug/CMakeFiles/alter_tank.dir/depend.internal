@@ -46,10 +46,14 @@ CMakeFiles/alter_tank.dir/src/graphics.c.o
  /home/ali/alter_tank/src/graphics.c
  /home/ali/alter_tank/src/graphics.h
 CMakeFiles/alter_tank.dir/src/items.c.o
+ /home/ali/alter_tank/src/bullet.h
+ /home/ali/alter_tank/src/colors.h
  /home/ali/alter_tank/src/items.c
  /home/ali/alter_tank/src/items.h
+ /home/ali/alter_tank/src/keyboard_handler.h
  /home/ali/alter_tank/src/map.h
  /home/ali/alter_tank/src/structs.h
+ /home/ali/alter_tank/src/tank.h
  /usr/include/SDL2/SDL_blendmode.h
  /usr/include/SDL2/SDL_config.h
  /usr/include/SDL2/SDL_endian.h

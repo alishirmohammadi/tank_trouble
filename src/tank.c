@@ -14,11 +14,13 @@
 
 
 void TankRotateRight(Tank *tank) {
-    tank->angle -= ROTATE_SPEED;
+    double scale = (tank->hasLaser == true ? 0.5 : 1);
+    tank->angle -= ROTATE_SPEED * scale;
 }
 
 void TankRotateLeft(Tank *tank) {
-    tank->angle += ROTATE_SPEED;
+    double scale = (tank->hasLaser == true ? 0.5 : 1);
+    tank->angle += ROTATE_SPEED * scale;
 }
 
 void TankForwardX(Tank *tank) {
@@ -94,7 +96,14 @@ void DrawTank(Tank tank[], int count, SDL_Renderer *renderer) {
                     tank[i].y + (TANK_RADIUS - 1) * sin(tank[i].angle),
                     tank[i].x + TANK_GUN_LENGTH * 1.2 * cos(tank[i].angle),
                     tank[i].y + TANK_GUN_LENGTH * 1.2 * sin(tank[i].angle),
-                    4, 0, 0, 0, 55 + abs(SDL_GetTicks() % 400 - 200));
+                    4, 0, 0, 0, 255);
+            thickLineRGBA(
+                    renderer,
+                    tank[i].x + TANK_GUN_LENGTH * 1.2 * cos(tank[i].angle),
+                    tank[i].y + TANK_GUN_LENGTH * 1.2 * sin(tank[i].angle),
+                    tank[i].x + 2000 * cos(tank[i].angle),
+                    tank[i].y + 2000 * sin(tank[i].angle),
+                    2, 255, 0, 0, abs(SDL_GetTicks() / 5 % 300 - 150));
         } else if(tank[i].hasMachineGun == true) {
             thickLineRGBA(
                     renderer,

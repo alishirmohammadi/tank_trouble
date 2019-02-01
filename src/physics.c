@@ -140,6 +140,8 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
             int item_y = manager->item[j].y;
             if (magnitude(x - item_x, y - item_y) < 18 + TANK_RADIUS) {
                 manager->item[j].enable = false;
+                manager->item[j].x = -100;
+                manager->item[j].y = -100;
                 tanks[i].hasBomb = false;
                 tanks[i].hasMachineGun = false;
                 tanks[i].hasMine = false;
@@ -201,6 +203,7 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
         }
         if (getKeyState(tanks[i].fire_key) && tanks[i].enable) {
             if (tanks[i].hasLaser == true) {
+                tanks[i].hasLaser = false;
                 disableKey(tanks[i].fire_key);
                 double x = tanks[i].x;
                 double y = tanks[i].y;
@@ -224,7 +227,7 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                     x += dx;
                     y += dy;
                 }
-                tanks[i].hasLaser = false;
+
             } else if (tanks[i].hasBomb) {
                 disableKey(tanks[i].fire_key);
                 if (tanks[i].BombState == 0) {
@@ -310,7 +313,25 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                 }
                 MoveBullet(&tanks[i].bullets[j]);
                 if (SDL_GetTicks() - tanks[i].bullets[j].instantiate_time > BULLET_LIFETIME * 1000) {
-                    tanks[i].bullets[j].state = FadeOut;
+                    if(tanks[i].bullets[j].isBomb == false)
+                        tanks[i].bullets[j].state = FadeOut;
+                    else {
+                        for (int k = 0; k < 20; k++) {
+                            small_bullet[k].state = Enable;
+                            small_bullet[k].instantiate_time = SDL_GetTicks();
+                            float angle = rand() % 31415 / 500.0;
+                            small_bullet[k].vx = cos(angle) * 1.5;
+                            small_bullet[k].vy = sin(angle) * 1.5;
+                            small_bullet[k].x = tanks[i].bullets[j].x;
+                            small_bullet[k].y = tanks[i].bullets[j].y;
+                        }
+                        for(int k = 0; k < count; k++) {
+                            tanks[k].hasBomb = false;
+                            tanks[k].BombState = 0;
+                        }
+                        tanks[i].bullets[j].state = Disable;
+                    }
+
                 }
                 if (SDL_GetTicks() - tanks[i].bullets[j].instantiate_time >
                     (BULLET_LIFETIME + BULLET_FADE_TIME) * 1000) {
@@ -323,6 +344,24 @@ void PhysicsRenderer(Tank *tanks, int count, Map *map, Smoke smoke[], int smoke_
                         continue;
                     if (magnitude(tanks[k].x - tanks[i].bullets[j].x, tanks[k].y - tanks[i].bullets[j].y) <
                         TANK_RADIUS - BULLET_RADIUS) {
+
+                        if(tanks[i].bullets[j].isBomb == true) {
+                            for (int h = 0; h < 20; h++) {
+                                small_bullet[h].state = Enable;
+                                small_bullet[h].instantiate_time = SDL_GetTicks();
+                                float angle = rand() % 31415 / 500.0;
+                                small_bullet[h].vx = cos(angle) * 1.5;
+                                small_bullet[h].vy = sin(angle) * 1.5;
+                                small_bullet[h].x = tanks[i].bullets[j].x;
+                                small_bullet[h].y = tanks[i].bullets[j].y;
+                            }
+                            for(int h = 0; h < count; h++) {
+                                tanks[h].hasBomb = false;
+                                tanks[h].BombState = 0;
+                            }
+                            tanks[i].bullets[j].state = Disable;
+                        }
+
                         tanks[i].bullets[j].state = Disable;
                         tanks[k].enable = false;
                         manager->last_destroy_time = SDL_GetTicks();

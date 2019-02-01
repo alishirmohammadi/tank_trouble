@@ -31,7 +31,7 @@ void InitializeGame(Manager *manager) {
     srand(time(NULL));
 
     char MapFiles[9][40];
-    const int MAP_COUNT = 9;
+    const int MAP_COUNT = 1;
     strcpy(MapFiles[0], "../maps/1.txt");
     strcpy(MapFiles[1], "../maps/2.txt");
     strcpy(MapFiles[2], "../maps/3.txt");
@@ -88,6 +88,7 @@ void InitializeGame(Manager *manager) {
     manager->tanks[2].colorIndex = tank3Color;
 
 
+    printf("%d\n", manager->tank_count);
     while(true) {
         LoadMap(&manager->map, MapFiles[rand() % MAP_COUNT]);
         int mapMaxX = maxMapX(&manager->map);
@@ -100,8 +101,11 @@ void InitializeGame(Manager *manager) {
         );
 
         Bullet small_bullets[20];
+        Bullet machineGunBullets[30];
         for(int i = 0; i < 20; i++)
             small_bullets[i].state = Disable;
+        for(int i = 0; i < 30; i++)
+            machineGunBullets[i].state = Disable;
 
         manager->tanks[0].x = PointMapToPixel(rand() % (mapMaxX - 1) + 0.5);
         manager->tanks[0].y = PointMapToPixel(rand() % (mapMaxY - 1) + 0.5);
@@ -175,7 +179,7 @@ void InitializeGame(Manager *manager) {
 
             if(rand() % ITEM_FREQUENCY == 0) {
                 int x, y;
-                if (CreateItem(manager->item, &manager->map, &x, &y) == true) {
+                if (CreateItem(manager->item, &manager->map, &x, &y, manager) == true) {
                     int disableSmokeId = 0;
                     while (disableSmokeId < SMOKE_COUNT && smoke[disableSmokeId].enable == true)
                         disableSmokeId++;
